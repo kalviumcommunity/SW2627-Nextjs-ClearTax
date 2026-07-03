@@ -1,26 +1,16 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import "tw-animate-css";
-
-@custom-variant dark (&:is(.dark *));
-
-/* Minimal theme vars (shadcn-generated variables removed) */
-@theme inline {
-  --color-background: var(--background, white);
-  --color-foreground: var(--foreground, black);
-}
 
 :root { --background: white; --foreground: black; --radius: 0.5rem; }
 
 .dark { --background: #111; --foreground: #eee; }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
-  }
+  *, *::before, *::after { box-sizing: border-box; }
 }
+
+body { background-color: var(--background); color: var(--foreground); }
+html { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }

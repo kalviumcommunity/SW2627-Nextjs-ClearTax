@@ -1,19 +1,13 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+:root { --background: white; --foreground: black; --radius: 0.5rem; }
+.dark { --background: #111; --foreground: #eee; }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-}
+@layer base { *, *::before, *::after { box-sizing: border-box; } }
 
-:root { }
-
-.dark { }
-
-@layer base {
-  * { @apply border-border outline-ring/50; }
-  body { @apply bg-background text-foreground; }
-  html { @apply font-sans; }
-}
+body { background-color: var(--background); color: var(--foreground); }
+html { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
