@@ -5,7 +5,7 @@ import Sidebar from "../components/layout/Sidebar";
 
 export const metadata = {
   title: "ClearTax Invoice Processing",
-  description: "Foundation UI for the invoice processing system frontend.",
+  description: "The invoice processing system.",
 };
 
 export default function RootLayout({ children }) {
