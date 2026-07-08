@@ -1,6 +1,9 @@
 const UploadBatch = require('../models/UploadBatch')
+const parseCSV = require('../utils/csvParser');
 
 const createUpload = async(file) => {
+
+    const rows = await parseCSV(file.path);
 
     const uploadBatch = await  UploadBatch.create({
 
