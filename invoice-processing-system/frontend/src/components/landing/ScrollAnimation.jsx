@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Loader2, ArrowDown, Play } from "lucide-react";
+import { Loader2, ArrowDown } from "lucide-react";
 import Link from "next/link";
 
 export default function ScrollAnimation() {
