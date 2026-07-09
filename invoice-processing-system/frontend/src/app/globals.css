@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @import "tw-animate-css";
 
@@ -303,10 +301,17 @@
 }
 
 .landing-page {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.landing-content-wrapper {
   width: min(1120px, calc(100% - 2rem));
   margin: 0 auto;
-  padding: 4rem 0 5rem;
+  padding: 0 0 5rem;
 }
+
 
 .hero-panel {
   position: relative;
@@ -662,9 +667,9 @@
 }
 
 @media (max-width: 900px) {
-  .landing-page {
+  .landing-content-wrapper {
     width: min(100% - 1.25rem, 1120px);
-    padding: 1.25rem 0 3rem;
+    padding: 0 0 3rem;
   }
 
   .hero-panel {
@@ -704,3 +709,673 @@
     min-width: 320px;
   }
 }
+
+/* Scroll Animation Styles */
+.scroll-animation-container {
+  position: relative;
+  height: 220vh;
+  margin: 4rem 0;
+}
+
+.scroll-animation-sticky {
+  position: sticky;
+  top: 6rem;
+  height: calc(100vh - 8rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-animation-layout {
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 0 1rem;
+  height: 100%;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .scroll-animation-layout {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 4rem;
+  }
+}
+
+.scroll-animation-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.scroll-animation-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  font-weight: 700;
+  margin: 0;
+  color: var(--foreground);
+}
+
+.scroll-animation-description {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--muted-foreground);
+  margin: 0;
+}
+
+.scroll-animation-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.scroll-animation-badge {
+  font-family: monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-strong);
+  letter-spacing: 0.05em;
+}
+
+.scroll-animation-bar-bg {
+  width: 100%;
+  height: 6px;
+  background: rgba(86, 67, 43, 0.08);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.scroll-animation-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-cool));
+  border-radius: 99px;
+  transition: width 150ms cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+
+.scroll-prompt {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.88rem;
+  color: var(--muted-foreground-soft);
+  margin-top: 1rem;
+}
+
+.scroll-animation-screen-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  min-height: 300px;
+}
+
+.scroll-animation-screen {
+  width: 100%;
+  height: min(450px, 80vh);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  background: var(--surface-strong);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.screen-header {
+  height: 2.5rem;
+  background: rgba(86, 67, 43, 0.04);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  position: relative;
+}
+
+.screen-dots {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 99px;
+}
+
+.dot--red { background: #ff5f56; }
+.dot--yellow { background: #ffbd2e; }
+.dot--green { background: #27c93f; }
+
+.screen-address {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--muted-foreground-soft);
+  background: rgba(255, 255, 255, 0.6);
+  padding: 0.2rem 1.5rem;
+  border-radius: 6px;
+  border: 1px solid rgba(86, 67, 43, 0.06);
+}
+
+.screen-body {
+  flex: 1;
+  background: #181512; /* Sleek dark code-like editor background */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.canvas-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.scroll-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Authentication Page Styles */
+.auth-page-container {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-card-wrapper {
+  position: relative;
+  width: min(100%, 460px);
+  z-index: 10;
+}
+
+/* Glassmorphism blob backdrops */
+.auth-card-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.auth-card-blob--1 {
+  width: 12rem;
+  height: 12rem;
+  background: var(--accent);
+  top: -2rem;
+  left: -2rem;
+}
+
+.auth-card-blob--2 {
+  width: 14rem;
+  height: 14rem;
+  background: var(--accent-cool);
+  bottom: -3rem;
+  right: -3rem;
+}
+
+.auth-card {
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  background: rgba(255, 250, 243, 0.85);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.auth-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.auth-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+.auth-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.auth-subtitle {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  color: var(--muted-foreground);
+  margin: 0;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.auth-error-banner {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #b91c1c;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.auth-field label {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted-foreground-soft);
+}
+
+.auth-field-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth-forgot-link {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.auth-forgot-link:hover {
+  color: var(--accent-strong);
+  text-decoration: underline;
+}
+
+.auth-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-input-icon {
+  position: absolute;
+  left: 1rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--muted-foreground-soft);
+}
+
+.auth-input-wrapper input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0 1rem 0 2.6rem;
+  border: 1px solid rgba(86, 67, 43, 0.14);
+  border-radius: 0.95rem;
+  background: rgba(255, 255, 255, 0.8);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  color: var(--foreground);
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.auth-input-wrapper input:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.auth-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0 1.5rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff7f0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(199, 99, 47, 0.2);
+  transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.auth-submit-btn:hover {
+  background: var(--accent-strong);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(199, 99, 47, 0.25);
+}
+
+.auth-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.auth-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.88rem;
+  color: var(--muted-foreground);
+}
+
+.auth-toggle-btn {
+  border: none;
+  background: none;
+  font-weight: 600;
+  color: var(--accent-cool);
+  cursor: pointer;
+  font-size: 0.88rem;
+  padding: 0.2rem;
+}
+
+.auth-toggle-btn:hover {
+  color: var(--accent-strong);
+  text-decoration: underline;
+}
+
+.auth-footer-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+  color: var(--muted-foreground-soft);
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+}
+
+.auth-success-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.success-icon-wrapper {
+  background: rgba(16, 185, 129, 0.1);
+  padding: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Navbar Auth Element Styles */
+.nav-profile-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.5);
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.nav-profile-info {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.nav-username {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.nav-btn-logout {
+  border: none;
+  background: rgba(86, 67, 43, 0.05);
+  color: var(--muted-foreground-soft);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.nav-btn-logout:hover {
+  background: rgba(199, 99, 47, 0.1);
+  color: var(--accent-strong);
+}
+
+.nav-auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.nav-btn-login,
+.nav-btn-signup {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.nav-btn-login {
+  color: var(--muted-foreground-soft);
+  border: 1px solid transparent;
+}
+
+.nav-btn-login:hover {
+  color: var(--foreground);
+  background: rgba(86, 67, 43, 0.05);
+}
+
+.nav-btn-signup {
+  background: var(--accent);
+  color: #fff7f0;
+  box-shadow: 0 4px 12px rgba(199, 99, 47, 0.15);
+}
+
+.nav-btn-signup:hover {
+  background: var(--accent-strong);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(199, 99, 47, 0.2);
+}
+
+/* Fullscreen Scroll Story Animation Styles */
+.scroll-story-container {
+  position: relative;
+  height: 380vh; /* Scroll length for animations & fade states */
+  width: 100%;
+}
+
+.scroll-story-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #ffffff 0%, #f7f3eb 100%);
+  z-index: 5;
+  transition: opacity 150ms ease-out;
+}
+
+.scroll-story-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.canvas-loader-fullscreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-foreground);
+  z-index: 20;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.scroll-story-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100% - 3rem, 360px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 15;
+  pointer-events: none;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.scroll-story-badge {
+  font-family: monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-strong);
+  letter-spacing: 0.05em;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 10px rgba(86, 67, 43, 0.05);
+}
+
+.scroll-story-progressbar {
+  width: 100%;
+  height: 5px;
+  background: rgba(86, 67, 43, 0.1);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.scroll-story-progressfill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-cool));
+  border-radius: 99px;
+  transition: width 120ms cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+
+.scroll-story-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  pointer-events: none;
+}
+
+.scroll-story-content {
+  position: absolute;
+  width: min(100% - 2rem, 580px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  transition: opacity 250ms ease-out, transform 250ms ease-out;
+  pointer-events: none;
+  background: rgba(255, 250, 243, 0.88);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  padding: 2.5rem 2.2rem;
+  box-shadow: var(--shadow);
+}
+
+.scroll-story-content--intro {
+  /* initially shown */
+}
+
+.scroll-story-content--hero {
+  /* shown after animation */
+}
+
+.scroll-story-heading {
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  line-height: 1.15;
+  font-weight: 700;
+  margin: 0;
+  color: var(--foreground);
+  letter-spacing: -0.02em;
+}
+
+.scroll-story-copy {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+  margin: 0;
+}
+
+.scroll-prompt-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted-foreground-soft);
+  margin-top: 0.5rem;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 0.4rem 1rem;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+}
+
+
+
+

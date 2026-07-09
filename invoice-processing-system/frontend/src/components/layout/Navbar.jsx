@@ -1,5 +1,9 @@
+"use client";
+
 import Link from "next/link";
-import { Bell, Search } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Bell, Search, User } from "lucide-react";
+import { useAuthStore } from "../../store/auth.store";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -9,6 +13,14 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const { user, logout, initialize } = useAuthStore();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    initialize();
+    setMounted(true);
+  }, [initialize]);
+
   return (
     <header className="topbar">
       <div className="topbar__inner">
@@ -36,8 +48,34 @@ export default function Navbar() {
           <button type="button" className="topbar__icon-button" aria-label="Notifications">
             <Bell className="h-4 w-4" />
           </button>
+
+          {mounted && user ? (
+            <div className="nav-profile-container">
+              <div className="nav-profile-info">
+                <User className="h-4 w-4 text-accent" />
+                <span className="nav-username">{user.name}</span>
+              </div>
+              <button 
+                type="button" 
+                onClick={logout} 
+                className="nav-btn-logout"
+              >
+                Log Out
+              </button>
+            </div>
+          ) : (
+            <div className="nav-auth-buttons">
+              <Link href="/login" className="nav-btn-login">
+                Sign In
+              </Link>
+              <Link href="/login" className="nav-btn-signup">
+                Sign Up
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </header>
   );
 }
+
