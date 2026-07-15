@@ -11,7 +11,7 @@ model UploadBatch{
 
   id              Int       @id @default(autoincrement())
   fileName        String    
-  originalName    String  
+  originalFileName    String  
 
   status          String    @default("PENDING")
 
