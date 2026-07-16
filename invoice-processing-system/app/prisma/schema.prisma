@@ -7,42 +7,73 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model UploadBatch{
-
-  id              Int       @id @default(autoincrement())
-  fileName        String    
-  originalFileName    String  
-
-  status          String    @default("PENDING")
-
-  totalRows       Int       @default(0)
-  processedRows   Int       @default(0)
-  successfulRows  Int       @default(0)
-  failedRows      Int       @default(0)
-
-  invoices        Invoice[]
-
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-
+enum Role {
+  USER
+  ADMIN
 }
 
+enum UploadStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
 
-model Invoice{
+enum InvoiceStatus {
+  PENDING
+  MATCHED
+  MISMATCHED
+  FAILED
+}
 
-  id              Int       @id @default(autoincrement())
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
 
-  invoiceNumber   String       
-  vendor          String
-  amount          Float
+  uploads   UploadBatch[]
 
-  status          String    @default("PENDING")  
-  errorMessage    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
-  uploadBatchId   Int       
-  uploadBatch     UploadBatch       @relation(fields : [uploadBatchId] , references: [id])
+model UploadBatch {
+  id               Int          @id @default(autoincrement())
 
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  fileName         String
+  originalFileName String
 
+  status           UploadStatus @default(PENDING)
+
+  totalRows        Int @default(0)
+  processedRows    Int @default(0)
+  successfulRows   Int @default(0)
+  failedRows       Int @default(0)
+
+  userId           Int
+  user             User @relation(fields: [userId], references: [id])
+
+  invoices         Invoice[]
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Invoice {
+  id            Int            @id @default(autoincrement())
+
+  invoiceNumber String
+  vendor        String
+  amount        Float
+
+  status        InvoiceStatus @default(PENDING)
+  errorMessage  String?
+
+  uploadBatchId Int
+  uploadBatch   UploadBatch @relation(fields: [uploadBatchId], references: [id])
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }

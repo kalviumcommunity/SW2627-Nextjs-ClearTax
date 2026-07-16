@@ -1,23 +1,20 @@
-const AUTH_COOKIE = "bip_auth";
+import bcrypt from "bcryptjs"
 
-export function login() {
-  if (typeof document !== "undefined") {
-    document.cookie = `${AUTH_COOKIE}=1; path=/`;
+import { createUser , findUserByEmail } from "@/repositories/user.repository"
+
+
+export async function signup(userData){
+
+  const existingUser = await findUserByEmail(userData.email)
+
+  if(existingUser){
+    throw new Error("Email already registered")
   }
 
-  return Promise.resolve({ success: true });
-}
+  const hashedPassword = await bcrypt.hash(userData.password , 10)
 
-export function signup() {
-  if (typeof document !== "undefined") {
-    document.cookie = `${AUTH_COOKIE}=1; path=/`;
-  }
-
-  return Promise.resolve({ success: true });
-}
-
-export function logout() {
-  if (typeof document !== "undefined") {
-    document.cookie = `${AUTH_COOKIE}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
-  }
+  return createUser({
+    ...userData,
+    password : hashedPassword
+  })
 }
