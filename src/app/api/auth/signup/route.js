@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
-import { signupSchema } from "@/validations/auth.validation";
-import { signup } from "@/services/auth.service";
+import { signupSchema } from "../../../../validations/auth.validation.js";
+import { signup } from "../../../../services/auth.service.js";
 
 export async function POST(request) {
     
