@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 
-import { login } from "@/services/auth.service";
-
-import { loginSchema } from "@/validations/auth.validation";
+import { login } from "../../../../services/auth.service.js";
+import { loginSchema } from "../../../../validations/auth.validation.js";
 
 
 
