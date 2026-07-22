@@ -2,9 +2,10 @@
 
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { CheckCircle2, XCircle, AlertTriangle, FileSpreadsheet, Download } from "lucide-react";
+import { CheckCircle2, XCircle, AlertTriangle, FileSpreadsheet, Download, Loader2 } from "lucide-react";
 import Papa from "papaparse";
 import { motion } from "framer-motion";
+import { useAuthStore } from "@/store/auth.store";
 
 function ResultsContent() {
   const searchParams = useSearchParams();
@@ -13,46 +14,106 @@ function ResultsContent() {
   const [job, setJob] = useState(null);
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error] = useState(null);
+  const [error, setError] = useState(null);
+  const token = useAuthStore((state) => state.token);
 
   useEffect(() => {
-    // MOCK DATA STANDIN
+    let intervalId;
+
     const fetchJob = async (id) => {
-      setTimeout(() => {
-        setJob({
-          id,
-          createdAt: new Date().toISOString(),
-          totalRows: 25,
-          status: 'completed',
-          results: [
-            { id: 1, rowNumber: 1, invoiceNumber: "INV-001", vendorName: "Acme Corp", amount: 150.0, taxAmount: 15.0, status: "match" },
-            { id: 2, rowNumber: 2, invoiceNumber: "INV-002", vendorName: "Globex", amount: 200.0, taxAmount: 20.0, status: "mismatch", errorMsg: "Amount difference detected" },
-            { id: 3, rowNumber: 3, invoiceNumber: "INV-003", vendorName: "Initech", amount: null, taxAmount: null, status: "failed", errorMsg: "Invalid invoice format" },
-          ]
-        });
+      try {
+        const headers = {};
+        if (token) {
+          headers["Authorization"] = `Bearer ${token}`;
+        }
+        const response = await fetch(`/api/upload/${id}`, { headers });
+        const data = await response.json();
+        
+        if (data.success) {
+          const batch = data.data;
+          
+          setJob({
+            id: batch.uploadId,
+            createdAt: new Date(batch.createdAt || new Date()).toLocaleString(),
+            totalRows: batch.totalRows,
+            status: batch.status.toLowerCase(),
+            results: batch.invoices.map((inv, idx) => ({
+              id: inv.id,
+              rowNumber: idx + 1,
+              fileName: batch.fileName ? (batch.fileName.split('_').slice(1).join('_') || batch.fileName) : "",
+              invoiceNumber: inv.invoiceNumber,
+              vendorName: inv.vendor,
+              amount: inv.amount,
+              taxAmount: Math.round(inv.amount * 0.18 * 100) / 100,
+              status: inv.status.toLowerCase() === 'matched' ? 'match' : inv.status.toLowerCase() === 'mismatched' ? 'mismatch' : inv.status.toLowerCase() === 'pending' ? 'pending' : 'failed',
+              errorMsg: inv.errorMessage
+            }))
+          });
+          
+          if (batch.status.toLowerCase() === 'completed' || batch.status.toLowerCase() === 'failed') {
+            if (intervalId) clearInterval(intervalId);
+          }
+        } else {
+          setError(data.message || "Failed to fetch job details");
+        }
+      } catch (err) {
+        console.error(err);
+        setError("An error occurred while fetching job details");
+      } finally {
         setLoading(false);
-      }, 600);
+      }
     };
 
     const fetchAllJobs = async () => {
-      setTimeout(() => {
-        setJobs([
-          { id: "cmrerputx00014hmk7ersk25", createdAt: "7/10/2026, 3:33:35 PM", totalRows: 25, status: "completed" },
-          { id: "cmrer9oph00024hi9jrqgklso", createdAt: "7/10/2026, 3:21:01 PM", totalRows: 95, status: "completed" },
-        ]);
+      try {
+        const headers = {};
+        if (token) {
+          headers["Authorization"] = `Bearer ${token}`;
+        }
+        const response = await fetch("/api/upload", { headers });
+        const data = await response.json();
+        
+        if (data.success) {
+          setJobs(data.data.map(batch => ({
+            id: batch.id,
+            createdAt: new Date(batch.createdAt).toLocaleString(),
+            totalRows: batch.totalRows,
+            status: batch.status.toLowerCase()
+          })));
+        } else {
+          setError(data.message || "Failed to fetch uploads list");
+        }
+      } catch (err) {
+        console.error(err);
+        setError("An error occurred while fetching uploads");
+      } finally {
         setLoading(false);
-      }, 600);
+      }
     };
 
-    if (jobId) {
-      fetchJob(jobId);
+    if (token) {
+      if (jobId) {
+        fetchJob(jobId);
+        intervalId = setInterval(() => fetchJob(jobId), 1500);
+      } else {
+        fetchAllJobs();
+      }
     } else {
-      fetchAllJobs();
+      setLoading(false);
     }
-  }, [jobId]);
+
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [jobId, token]);
 
   if (loading) {
-    return <div className="flex justify-center py-12"><div className="animate-pulse flex space-x-4"><div className="h-4 bg-gray-200 rounded w-3/4"></div></div></div>;
+    return (
+      <div className="flex flex-col items-center justify-center py-20">
+        <Loader2 className="animate-spin text-indigo-500 mb-4" size={36} />
+        <p className="text-sm text-stone-500 font-medium">Retrieving invoice records...</p>
+      </div>
+    );
   }
 
   if (error) {
@@ -81,12 +142,15 @@ function ResultsContent() {
               jobs.map(j => (
                 <li key={j.id} className="p-5 bg-white rounded-xl border border-gray-100 shadow-sm hover:border-gray-200 hover:shadow transition-all flex flex-col md:flex-row md:items-center justify-between group">
                   <div className="mb-4 md:mb-0">
-                    <p className="font-semibold text-[15px] text-gray-900">Job: {j.id}</p>
+                    <p className="font-semibold text-[15px] text-gray-900">Job: #{j.id}</p>
                     <p className="text-[13px] text-gray-500 mt-1">{j.createdAt}</p>
                   </div>
                   <div className="flex items-center space-x-4">
                     <span className="text-xs bg-gray-100 px-3 py-1 rounded-md text-gray-700 font-medium">{j.totalRows} Rows</span>
-                    <span className={`text-xs px-3 py-1 rounded-md font-medium ${j.status === 'completed' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
+                    <span className={`text-xs px-3 py-1 rounded-md font-medium ${
+                      j.status === 'completed' ? 'bg-green-100 text-green-700' : 
+                      j.status === 'failed' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'
+                    }`}>
                       {j.status}
                     </span>
                     <a href={`/results?jobId=${j.id}`} className="text-indigo-600 hover:text-indigo-800 font-medium text-sm transition-colors">View Details &rarr;</a>
@@ -106,13 +170,7 @@ function ResultsContent() {
   const matches = job.results.filter(r => r.status === 'match').length;
   const mismatches = job.results.filter(r => r.status === 'mismatch').length;
   const failedRows = job.results.filter(r => r.status === 'failed').length;
-  
-  let failedFiles = [];
-  if (job.failedFiles) {
-    try {
-      failedFiles = JSON.parse(job.failedFiles);
-    } catch {}
-  }
+  const processedCount = matches + mismatches + failedRows;
 
   return (
     <motion.div 
@@ -124,7 +182,7 @@ function ResultsContent() {
       <motion.div variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }} className="flex justify-between items-end">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-gray-900">Job Results</h1>
-          <p className="text-gray-500 mt-1 text-sm">Details for Job ID: {job.id}</p>
+          <p className="text-gray-500 mt-1 text-sm">Details for Job ID: #{job.id}</p>
         </div>
         <button
           onClick={() => {
@@ -153,6 +211,31 @@ function ResultsContent() {
         </button>
       </motion.div>
 
+      {/* Progress Bar for Active Job */}
+      {(job.status === 'processing' || job.status === 'pending') && (
+        <motion.div 
+          variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}
+          className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm"
+        >
+          <div className="flex justify-between text-sm font-semibold text-gray-700 mb-2">
+            <span className="flex items-center gap-2">
+              <Loader2 className="animate-spin text-indigo-500" size={16} />
+              Processing Invoices...
+            </span>
+            <span>{Math.round((processedCount / job.totalRows) * 100) || 0}%</span>
+          </div>
+          <div className="w-full bg-gray-100 h-2.5 rounded-full overflow-hidden">
+            <div 
+              className="bg-indigo-500 h-full transition-all duration-300" 
+              style={{ width: `${(processedCount / job.totalRows) * 100}%` }}
+            />
+          </div>
+          <p className="text-xs text-gray-400 mt-2">
+            Processed {processedCount} of {job.totalRows} invoices
+          </p>
+        </motion.div>
+      )}
+
       <motion.div 
         variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }} 
         className="grid grid-cols-1 md:grid-cols-4 gap-4"
@@ -178,22 +261,6 @@ function ResultsContent() {
           <span className="text-2xl font-bold text-gray-900">{failedRows}</span>
         </div>
       </motion.div>
-
-      {failedFiles.length > 0 && (
-        <div className="bg-red-50 rounded-2xl p-6 border border-red-100 shadow-sm">
-          <h3 className="text-lg font-bold text-red-900 mb-4 flex items-center">
-            <AlertTriangle className="mr-2" /> Files that completely failed
-          </h3>
-          <ul className="space-y-3">
-            {failedFiles.map((f, i) => (
-              <li key={i} className="flex flex-col md:flex-row md:items-center justify-between p-4 bg-white rounded-xl border border-red-100">
-                <span className="font-medium text-gray-900">{f.name}</span>
-                <span className="text-red-600 text-sm mt-1 md:mt-0">{f.reason}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
 
       <motion.div variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }} className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
@@ -223,6 +290,7 @@ function ResultsContent() {
                     {result.status === 'match' && <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold uppercase bg-green-100 text-green-700"><CheckCircle2 size={12} className="mr-1.5"/> Match</span>}
                     {result.status === 'mismatch' && <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold uppercase bg-orange-100 text-orange-700"><AlertTriangle size={12} className="mr-1.5"/> Mismatch</span>}
                     {result.status === 'failed' && <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold uppercase bg-red-100 text-red-700"><XCircle size={12} className="mr-1.5"/> Failed</span>}
+                    {result.status === 'pending' && <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold uppercase bg-blue-100 text-blue-700"><Loader2 size={12} className="mr-1.5 animate-spin"/> Processing</span>}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-500">
                     {result.errorMsg ? <span className="text-red-600">{result.errorMsg}</span> : <span className="text-gray-400">None</span>}

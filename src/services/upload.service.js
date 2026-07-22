@@ -4,6 +4,7 @@ import {
   getUploadBatchById,
   getAllUploadBatches,
 } from "../repositories/upload.repository.js";
+import { invoiceQueue } from "@/queues/invoice.queue.js";
 
 const uploadService = {
   /**
@@ -48,7 +49,7 @@ const uploadService = {
             parseFloat(
               row.amount || row.Amount || row.price || row.Price || 0
             ) || 0,
-          status: row.status || row.Status || "MATCHED",
+          status: row.status || row.Status || "PENDING",
           error: row.error || row.Error || null,
         }));
       }
@@ -64,6 +65,13 @@ const uploadService = {
       },
       parsedInvoices
     );
+
+    const job = await invoiceQueue.add("process-upload", {
+      uploadBatchId: batchResult.id,
+      userId,
+    });
+
+    console.log("Job Added:", job.id, job.name);
 
     return {
       success: true,

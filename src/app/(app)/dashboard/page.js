@@ -13,6 +13,8 @@ import Button from "@/components/ui/Button";
 export default function DashboardPage() {
   const [profile, setProfile] = useState(null);
   const [profileLoading, setProfileLoading] = useState(true);
+  const [stats, setStats] = useState({ total: 0, matches: 0, mismatches: 0, pending: 0 });
+  const [statsLoading, setStatsLoading] = useState(true);
   const router = useRouter();
   const clearUser = useAuthStore((state) => state.clearUser);
 
@@ -36,6 +38,40 @@ export default function DashboardPage() {
 
     fetchProfile();
   }, [clearUser, router]);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const response = await axios.get("/upload");
+        if (response.data.success) {
+          const uploads = response.data.data;
+          let total = 0;
+          let matches = 0;
+          let mismatches = 0;
+          let pending = 0;
+
+          uploads.forEach(batch => {
+            if (batch.invoices) {
+              batch.invoices.forEach(inv => {
+                total++;
+                if (inv.status === "MATCHED") matches++;
+                else if (inv.status === "MISMATCHED") mismatches++;
+                else if (inv.status === "PENDING" || inv.status === "PROCESSING") pending++;
+              });
+            }
+          });
+
+          setStats({ total, matches, mismatches, pending });
+        }
+      } catch (err) {
+        console.error("Error fetching dashboard stats:", err);
+      } finally {
+        setStatsLoading(false);
+      }
+    };
+
+    fetchStats();
+  }, []);
 
   const containerVariants = {
     visible: { transition: { staggerChildren: 0.1 } },
@@ -111,10 +147,10 @@ export default function DashboardPage() {
         variants={{ visible: { transition: { staggerChildren: 0.05 } } }}
       >
         {[
-          { name: "Total Invoices", value: profileLoading ? "..." : "--", icon: FileSpreadsheet, accent: "bg-blue-400" },
-          { name: "Matches", value: profileLoading ? "..." : "--", icon: CheckCircle, accent: "bg-emerald-400" },
-          { name: "Mismatches", value: profileLoading ? "..." : "--", icon: AlertCircle, accent: "bg-rose-400" },
-          { name: "Pending", value: profileLoading ? "..." : "--", icon: Clock, accent: "bg-indigo-400" },
+          { name: "Total Invoices", value: statsLoading ? "..." : stats.total, icon: FileSpreadsheet, accent: "bg-blue-400" },
+          { name: "Matches", value: statsLoading ? "..." : stats.matches, icon: CheckCircle, accent: "bg-emerald-400" },
+          { name: "Mismatches", value: statsLoading ? "..." : stats.mismatches, icon: AlertCircle, accent: "bg-rose-400" },
+          { name: "Pending", value: statsLoading ? "..." : stats.pending, icon: Clock, accent: "bg-indigo-400" },
         ].map((stat) => (
           <motion.div
             key={stat.name}
