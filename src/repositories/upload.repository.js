@@ -107,3 +107,169 @@ export async function getAllUploadBatches() {
     },
   });
 }
+
+/**
+ * Creates a single invoice record.
+ */
+export async function createInvoice(data) {
+  return await prisma.invoice.create({
+    data: {
+      invoiceNumber: String(data.invoiceNumber),
+      vendor: String(data.vendor),
+      amount: parseFloat(data.amount) || 0,
+      status: data.status || "PENDING",
+      errorMessage: data.errorMessage || null,
+      uploadBatchId: parseInt(data.uploadBatchId),
+    },
+  });
+}
+
+/**
+ * Updates progress metrics and status of an UploadBatch.
+ */
+export async function updateUploadBatchProgress(id, progressData) {
+  return await prisma.uploadBatch.update({
+    where: { id: parseInt(id) },
+    data: progressData,
+  });
+}
+
+/**
+ * Retrieves UploadBatches with pagination, sorting, search, and status filtering.
+ */
+export async function getUploadBatchesWithPagination(options = {}) {
+  const {
+    page = 1,
+    limit = 10,
+    sortBy = "createdAt",
+    sortOrder = "desc",
+    status,
+    search,
+    userId,
+  } = options;
+
+  const skip = (parseInt(page) - 1) * parseInt(limit);
+  const take = parseInt(limit);
+
+  const where = {};
+  
+  if (userId) {
+    where.userId = parseInt(userId);
+  }
+  
+  if (status) {
+    where.status = status;
+  }
+  
+  if (search) {
+    where.OR = [
+      { fileName: { contains: search, mode: "insensitive" } },
+      { originalFileName: { contains: search, mode: "insensitive" } },
+    ];
+  }
+
+  // Ensure sortBy is a valid column name
+  const validSortFields = ["createdAt", "updatedAt", "totalRows", "processedRows", "status"];
+  const finalSortBy = validSortFields.includes(sortBy) ? sortBy : "createdAt";
+  const finalSortOrder = ["asc", "desc"].includes(sortOrder.toLowerCase()) ? sortOrder.toLowerCase() : "desc";
+
+  const [data, total] = await Promise.all([
+    prisma.uploadBatch.findMany({
+      where,
+      orderBy: { [finalSortBy]: finalSortOrder },
+      skip,
+      take,
+      include: {
+        invoices: true,
+      },
+    }),
+    prisma.uploadBatch.count({ where }),
+  ]);
+
+  return {
+    data,
+    meta: {
+      total,
+      page: parseInt(page),
+      limit: parseInt(limit),
+      totalPages: Math.ceil(total / parseInt(limit)),
+    },
+  };
+}
+
+/**
+ * Retrieves Invoices with pagination, sorting, search, and status filtering.
+ */
+export async function getInvoicesWithPagination(options = {}) {
+  const {
+    page = 1,
+    limit = 10,
+    sortBy = "createdAt",
+    sortOrder = "desc",
+    status,
+    uploadBatchId,
+    search,
+    userId,
+  } = options;
+
+  const skip = (parseInt(page) - 1) * parseInt(limit);
+  const take = parseInt(limit);
+
+  const where = {};
+
+  if (status) {
+    where.status = status;
+  }
+
+  if (uploadBatchId) {
+    where.uploadBatchId = parseInt(uploadBatchId);
+  }
+
+  if (userId) {
+    where.uploadBatch = {
+      userId: parseInt(userId),
+    };
+  }
+
+  if (search) {
+    where.OR = [
+      { invoiceNumber: { contains: search, mode: "insensitive" } },
+      { vendor: { contains: search, mode: "insensitive" } },
+      { errorMessage: { contains: search, mode: "insensitive" } },
+    ];
+  }
+
+  // Ensure sortBy is a valid column name
+  const validSortFields = ["createdAt", "updatedAt", "amount", "invoiceNumber", "vendor", "status"];
+  const finalSortBy = validSortFields.includes(sortBy) ? sortBy : "createdAt";
+  const finalSortOrder = ["asc", "desc"].includes(sortOrder.toLowerCase()) ? sortOrder.toLowerCase() : "desc";
+
+  const [data, total] = await Promise.all([
+    prisma.invoice.findMany({
+      where,
+      orderBy: { [finalSortBy]: finalSortOrder },
+      skip,
+      take,
+    }),
+    prisma.invoice.count({ where }),
+  ]);
+
+  return {
+    data,
+    meta: {
+      total,
+      page: parseInt(page),
+      limit: parseInt(limit),
+      totalPages: Math.ceil(total / parseInt(limit)),
+    },
+  };
+}
+
+/**
+ * Deletes all invoices associated with an UploadBatch.
+ */
+export async function deleteInvoicesByBatchId(batchId) {
+  return await prisma.invoice.deleteMany({
+    where: { uploadBatchId: parseInt(batchId) },
+  });
+}

@@ -99,11 +99,11 @@ export async function POST(request) {
     // 6. Delegate Processing to Service Layer
     const result = await uploadService.processFileUpload(file, userId);
 
-    if (!result.batch || result.batch.totalRows === 0) {
+    if (!result.batch) {
       return NextResponse.json(
         {
           success: false,
-          message: "CSV file contains no valid data rows",
+          message: "Failed to create upload batch",
         },
         { status: 400 }
       );

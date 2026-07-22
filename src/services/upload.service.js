@@ -1,8 +1,13 @@
-import Papa from "papaparse";
+import fs from "fs";
+import path from "path";
 import {
-  createUploadBatchWithInvoices,
+  createUploadBatch,
   getUploadBatchById,
   getAllUploadBatches,
+  getUploadBatchesWithPagination,
+  getInvoicesWithPagination,
+  deleteInvoicesByBatchId,
+  updateUploadBatchProgress,
 } from "../repositories/upload.repository.js";
 import { invoiceQueue } from "@/queues/invoice.queue.js";
 
@@ -19,63 +24,38 @@ const uploadService = {
 
     const originalFileName = file.name;
     const fileName = `${Date.now()}_${originalFileName}`;
-    const fileText = await file.text();
 
-    let parsedInvoices = [];
-
-    if (fileText && fileText.trim().length > 0) {
-      const parseResult = Papa.parse(fileText, {
-        header: true,
-        skipEmptyLines: true,
-        transformHeader: (header) => header.trim(),
-      });
-
-      if (parseResult.data && parseResult.data.length > 0) {
-        parsedInvoices = parseResult.data.map((row, index) => ({
-          invoiceNumber:
-            row.invoiceNumber ||
-            row["Invoice Number"] ||
-            row.id ||
-            row.ID ||
-            `INV-${1000 + index}`,
-          vendor:
-            row.vendor ||
-            row.Vendor ||
-            row.customer ||
-            row.Customer ||
-            row.supplier ||
-            "Default Vendor",
-          amount:
-            parseFloat(
-              row.amount || row.Amount || row.price || row.Price || 0
-            ) || 0,
-          status: row.status || row.Status || "PENDING",
-          error: row.error || row.Error || null,
-        }));
-      }
+    // 1. Ensure uploads directory exists
+    const uploadsDir = path.join(process.cwd(), "uploads");
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true });
     }
 
-    // Call Repository to store in PostgreSQL database
-    const batchResult = await createUploadBatchWithInvoices(
-      {
-        fileName,
-        originalFileName,
-        totalRows: parsedInvoices.length,
-        userId,
-      },
-      parsedInvoices
-    );
+    // 2. Save file to disk
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const filePath = path.join(uploadsDir, fileName);
+    await fs.promises.writeFile(filePath, buffer);
 
-    const job = await invoiceQueue.add("process-upload", {
-      uploadBatchId: batchResult.id,
+    // 3. Create initial UploadBatch in database (in PENDING status, 0 rows processed/saved)
+    const batchResult = await createUploadBatch({
+      fileName,
+      originalFileName,
+      totalRows: 0,
       userId,
     });
 
-    console.log("Job Added:", job.id, job.name);
+    // 4. Add job to BullMQ queue
+    const job = await invoiceQueue.add("process-upload", {
+      uploadBatchId: batchResult.id,
+      filePath,
+      userId,
+    });
+
+    console.log("Job Added:", job.id, job.name, "for batch:", batchResult.id);
 
     return {
       success: true,
-      message: "File uploaded and processed successfully",
+      message: "File uploaded and queued for background processing successfully",
       batch: batchResult,
     };
   },
@@ -90,12 +70,67 @@ const uploadService = {
       fileName: batch.originalFileName,
       status: batch.status,
       totalRows: batch.totalRows,
+      processedRows: batch.processedRows,
+      successfulRows: batch.successfulRows,
+      failedRows: batch.failedRows,
       invoices: batch.invoices,
+      createdAt: batch.createdAt,
     };
   },
 
   async getAllUploads() {
     return await getAllUploadBatches();
+  },
+
+  /**
+   * Retrieves upload batches with pagination, sorting, search, and filtering
+   */
+  async getUploadsPaged(options) {
+    return await getUploadBatchesWithPagination(options);
+  },
+
+  /**
+   * Retrieves invoices with pagination, sorting, search, and filtering
+   */
+  async getInvoicesPaged(options) {
+    return await getInvoicesWithPagination(options);
+  },
+
+  /**
+   * Deletes old invoice records, resets progress metrics, and re-triggers background processing.
+   */
+  async retryUploadBatch(uploadBatchId) {
+    const batch = await getUploadBatchById(uploadBatchId);
+    if (!batch) {
+      throw new Error("Upload batch not found");
+    }
+
+    // 1. Delete associated invoices
+    await deleteInvoicesByBatchId(batch.id);
+
+    // 2. Reset progress counters
+    const resetBatch = await updateUploadBatchProgress(batch.id, {
+      status: "PENDING",
+      processedRows: 0,
+      successfulRows: 0,
+      failedRows: 0,
+    });
+
+    // 3. Re-queue the job in BullMQ
+    const filePath = path.join(process.cwd(), "uploads", batch.fileName);
+    const job = await invoiceQueue.add("process-upload", {
+      uploadBatchId: batch.id,
+      filePath,
+      userId: batch.userId,
+    });
+
+    console.log(`[Service] Retried job ${job.id} added for Batch ${batch.id}`);
+
+    return {
+      success: true,
+      message: "Job successfully queued for retry processing.",
+      batch: resetBatch,
+    };
   },
 };
 

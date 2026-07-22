@@ -1,0 +1,6 @@
+Invoice Number,Vendor,Amount
+INV-001,Acme Corp,150.0
+INV-002,Globex,200.0
+INV-003,Initech,120.0
+INV-004,Test Vendor,-50.0
+INV-001,Acme Corp,300.0
