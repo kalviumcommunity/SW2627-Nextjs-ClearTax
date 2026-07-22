@@ -1,26 +1,80 @@
 "use client";
 
-import { useState } from "react";
-import { User, Lock, Mail, Save, AlertCircle, CheckCircle2 } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { User, Lock, Mail, Save, AlertCircle, CheckCircle2, Camera, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useAuthStore } from "@/store/auth.store";
+import { toast } from "sonner";
 
 export default function ProfilePage() {
-  const [name, setName] = useState("hakuna");
-  const email = "muehehe790@gmail.com";
+  const user = useAuthStore((state) => state.user);
+  const setUser = useAuthStore((state) => state.setUser);
+  const token = useAuthStore((state) => state.token);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [profilePicture, setProfilePicture] = useState(null);
+
+  // Avatar upload states
+  const [avatarFile, setAvatarFile] = useState(null);
+  const [avatarPreview, setAvatarPreview] = useState(null);
+  const fileInputRef = useRef(null);
+
   const [nameStatus, setNameStatus] = useState({ loading: false, error: null, success: false });
 
   const [passwordForm, setPasswordForm] = useState({ oldPassword: "", newPassword: "", confirmPassword: "" });
   const [passStatus, setPassStatus] = useState({ loading: false, error: null, success: false });
 
+  // Sync state with user store once loaded
+  useEffect(() => {
+    if (user) {
+      setName(user.name || "");
+      setEmail(user.email || "");
+      setProfilePicture(user.profilePicture || null);
+      setAvatarPreview(user.profilePicture || null);
+    }
+  }, [user]);
+
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setAvatarFile(file);
+      setAvatarPreview(URL.createObjectURL(file));
+    }
+  };
+
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
     setNameStatus({ loading: true, error: null, success: false });
-    
-    // MOCK DATA STANDIN
-    setTimeout(() => {
+
+    try {
+      const formData = new FormData();
+      formData.append("name", name);
+      if (avatarFile) {
+        formData.append("profilePicture", avatarFile);
+      }
+
+      const response = await fetch("/api/auth/me", {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Failed to update profile details.");
+      }
+
+      setUser(data.user);
       setNameStatus({ loading: false, error: null, success: true });
-      setTimeout(() => setNameStatus(s => ({ ...s, success: false })), 3000);
-    }, 800);
+      toast.success("Profile updated successfully!");
+      setTimeout(() => setNameStatus((s) => ({ ...s, success: false })), 3000);
+    } catch (err) {
+      setNameStatus({ loading: false, error: err.message, success: false });
+      toast.error(err.message || "Error updating profile details");
+    }
   };
 
   const handleUpdatePassword = async (e) => {
@@ -28,20 +82,42 @@ export default function ProfilePage() {
     if (passwordForm.newPassword !== passwordForm.confirmPassword) {
       return setPassStatus({ loading: false, error: "New passwords do not match", success: false });
     }
-    
+
     setPassStatus({ loading: true, error: null, success: false });
-    
-    // MOCK DATA STANDIN
-    setTimeout(() => {
+
+    try {
+      const response = await fetch("/api/auth/me", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          oldPassword: passwordForm.oldPassword,
+          newPassword: passwordForm.newPassword,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Failed to update password.");
+      }
+
       setPasswordForm({ oldPassword: "", newPassword: "", confirmPassword: "" });
       setPassStatus({ loading: false, error: null, success: true });
-      setTimeout(() => setPassStatus(s => ({ ...s, success: false })), 3000);
-    }, 800);
+      toast.success("Password updated successfully!");
+      setTimeout(() => setPassStatus((s) => ({ ...s, success: false })), 3000);
+    } catch (err) {
+      setPassStatus({ loading: false, error: err.message, success: false });
+      toast.error(err.message || "Error updating password");
+    }
   };
 
+  const initial = name ? name.charAt(0).toUpperCase() : "?";
+
   return (
-    <motion.div 
-      className="space-y-6 max-w-3xl"
+    <motion.div
+      className="space-y-6 max-w-3xl animate-fadeIn"
       initial="hidden"
       animate="visible"
       variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
@@ -52,11 +128,14 @@ export default function ProfilePage() {
       </motion.div>
 
       {/* Personal Information */}
-      <motion.div variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }} className="bg-white border border-gray-200 rounded-2xl p-6">
+      <motion.div
+        variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}
+        className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm"
+      >
         <h2 className="text-[15px] font-semibold text-gray-900 mb-6 flex items-center">
           <User className="mr-2 text-indigo-500" size={18} strokeWidth={2} /> Personal Information
         </h2>
-        
+
         {nameStatus.error && (
           <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-lg flex items-center text-sm">
             <AlertCircle size={16} className="mr-2" /> {nameStatus.error}
@@ -68,36 +147,77 @@ export default function ProfilePage() {
           </div>
         )}
 
-        <form onSubmit={handleUpdateProfile} className="space-y-4">
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">Email Address</label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
-                <Mail size={16} />
+        <form onSubmit={handleUpdateProfile} className="space-y-6">
+          {/* Avatar Section */}
+          <div className="flex flex-col items-center sm:flex-row gap-6 pb-4 border-b border-gray-50">
+            <div className="relative group cursor-pointer" onClick={() => fileInputRef.current?.click()}>
+              {avatarPreview ? (
+                <img
+                  src={avatarPreview}
+                  alt="Profile"
+                  className="w-24 h-24 rounded-full object-cover border border-gray-200 shadow-sm transition-all group-hover:opacity-85"
+                />
+              ) : (
+                <div className="w-24 h-24 rounded-full bg-[#f4f2ff] flex items-center justify-center text-[#5a38ef] font-bold text-3xl border border-gray-150 shadow-sm transition-all group-hover:opacity-85">
+                  {initial}
+                </div>
+              )}
+              <div className="absolute inset-0 bg-black/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+                <Camera size={20} />
               </div>
               <input
-                type="email"
-                disabled
-                value={email}
-                className="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg bg-gray-50 text-gray-500 focus:outline-none"
+                type="file"
+                ref={fileInputRef}
+                onChange={handleAvatarChange}
+                accept="image/*"
+                className="hidden"
               />
             </div>
-            <p className="text-[11px] text-gray-400 mt-1">Email cannot be changed.</p>
+            <div>
+              <h3 className="text-sm font-semibold text-gray-900">Profile Picture</h3>
+              <p className="text-xs text-gray-400 mt-1 max-w-sm">
+                Click on the avatar to upload a new profile picture. Supports PNG, JPG, or GIF up to 2MB.
+              </p>
+              {avatarFile && (
+                <p className="text-xs text-indigo-555 font-medium mt-2">
+                  New picture selected: {avatarFile.name} (uncommitted)
+                </p>
+              )}
+            </div>
           </div>
-          
-          <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">Full Name</label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
-                <User size={16} />
+
+          {/* Details Forms */}
+          <div className="space-y-4">
+            <div>
+              <label className="block text-xs font-medium text-gray-700 mb-1">Email Address</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                  <Mail size={16} />
+                </div>
+                <input
+                  type="email"
+                  disabled
+                  value={email}
+                  className="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg bg-gray-50 text-gray-500 focus:outline-none"
+                />
               </div>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
-                required
-              />
+              <p className="text-[11px] text-gray-400 mt-1">Email cannot be changed.</p>
+            </div>
+
+            <div>
+              <label className="block text-xs font-medium text-gray-700 mb-1">Full Name</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                  <User size={16} />
+                </div>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
+                  required
+                />
+              </div>
             </div>
           </div>
 
@@ -105,17 +225,29 @@ export default function ProfilePage() {
             <button
               type="submit"
               disabled={nameStatus.loading}
-              className="inline-flex items-center bg-indigo-400 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors disabled:opacity-50"
+              className="inline-flex items-center bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors disabled:opacity-50"
             >
-              <Save size={16} className="mr-2" />
-              {nameStatus.loading ? "Saving..." : "Save Changes"}
+              {nameStatus.loading ? (
+                <>
+                  <Loader2 size={16} className="mr-2 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <Save size={16} className="mr-2" />
+                  Save Changes
+                </>
+              )}
             </button>
           </div>
         </form>
       </motion.div>
 
       {/* Change Password */}
-      <motion.div variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }} className="bg-white border border-gray-200 rounded-2xl p-6">
+      <motion.div
+        variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}
+        className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm"
+      >
         <h2 className="text-[15px] font-semibold text-gray-900 mb-6 flex items-center">
           <Lock className="mr-2 text-indigo-500" size={18} strokeWidth={2} /> Change Password
         </h2>
@@ -141,7 +273,7 @@ export default function ProfilePage() {
               <input
                 type="password"
                 value={passwordForm.oldPassword}
-                onChange={(e) => setPasswordForm({...passwordForm, oldPassword: e.target.value})}
+                onChange={(e) => setPasswordForm({ ...passwordForm, oldPassword: e.target.value })}
                 className="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
                 required
               />
@@ -158,7 +290,7 @@ export default function ProfilePage() {
                 <input
                   type="password"
                   value={passwordForm.newPassword}
-                  onChange={(e) => setPasswordForm({...passwordForm, newPassword: e.target.value})}
+                  onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
                   className="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
                   required
                   minLength={6}
@@ -174,7 +306,7 @@ export default function ProfilePage() {
                 <input
                   type="password"
                   value={passwordForm.confirmPassword}
-                  onChange={(e) => setPasswordForm({...passwordForm, confirmPassword: e.target.value})}
+                  onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
                   className="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
                   required
                   minLength={6}
@@ -189,8 +321,17 @@ export default function ProfilePage() {
               disabled={passStatus.loading || !passwordForm.oldPassword || !passwordForm.newPassword}
               className="inline-flex items-center bg-gray-500 hover:bg-gray-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors disabled:opacity-50"
             >
-              <Lock size={16} className="mr-2" />
-              {passStatus.loading ? "Updating..." : "Update Password"}
+              {passStatus.loading ? (
+                <>
+                  <Loader2 size={16} className="mr-2 animate-spin" />
+                  Updating...
+                </>
+              ) : (
+                <>
+                  <Lock size={16} className="mr-2" />
+                  Update Password
+                </>
+              )}
             </button>
           </div>
         </form>

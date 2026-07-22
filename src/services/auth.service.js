@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken";
 
-import { createUser , findUserByEmail , findUserById } from "../repositories/user.repository.js"
+import { createUser , findUserByEmail , findUserById, updateUser } from "../repositories/user.repository.js"
 
 
 export async function signup(userData){
@@ -55,7 +55,8 @@ export async function login(userData){
       id : user.id,
       name : user.name,
       email:user.email,
-      role : user.role
+      role : user.role,
+      profilePicture : user.profilePicture
     }
   }
 }
@@ -69,4 +70,37 @@ export async function getCurrentUser(userId){
   }
 
   return user;
+}
+
+export async function updateUserProfile(userId, updateData) {
+  const user = await findUserById(userId);
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const prismaUpdateData = {};
+
+  if (updateData.name !== undefined) {
+    prismaUpdateData.name = updateData.name;
+  }
+
+  if (updateData.profilePicture !== undefined) {
+    prismaUpdateData.profilePicture = updateData.profilePicture;
+  }
+
+  if (updateData.newPassword) {
+    const dbUser = await findUserByEmail(user.email);
+    const isPasswordValid = await bcrypt.compare(
+      updateData.oldPassword,
+      dbUser.password
+    );
+    if (!isPasswordValid) {
+      throw new Error("Current password is not valid");
+    }
+
+    const hashedNewPassword = await bcrypt.hash(updateData.newPassword, 10);
+    prismaUpdateData.password = hashedNewPassword;
+  }
+
+  return await updateUser(userId, prismaUpdateData);
 }
