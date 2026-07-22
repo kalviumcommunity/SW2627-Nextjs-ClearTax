@@ -3,9 +3,9 @@ import { verifyToken } from "@/middleware/auth.middleware";
 import uploadService from "@/services/upload.service";
 
 /**
- * GET /api/invoices
- * Retrieves a paginated list of invoices for the logged-in user.
- * Supports sorting, search by invoice number or vendor name, and status/batch filtering.
+ * GET /api/uploads
+ * Retrieves a paginated list of upload batches for the logged-in user.
+ * Supports sorting, search by filename, and status filtering.
  */
 export async function GET(request) {
   try {
@@ -19,17 +19,15 @@ export async function GET(request) {
     const sortBy = searchParams.get("sortBy") || "createdAt";
     const sortOrder = searchParams.get("sortOrder") || "desc";
     const status = searchParams.get("status");
-    const uploadBatchId = searchParams.get("uploadBatchId");
     const search = searchParams.get("search");
 
     // 3. Retrieve paginated list from service
-    const result = await uploadService.getInvoicesPaged({
+    const result = await uploadService.getUploadsPaged({
       page,
       limit,
       sortBy,
       sortOrder,
       status,
-      uploadBatchId: uploadBatchId ? parseInt(uploadBatchId) : undefined,
       search,
       userId: decoded.id,
     });
@@ -40,7 +38,7 @@ export async function GET(request) {
       meta: result.meta,
     });
   } catch (error) {
-    console.error("GET Invoices List Error:", error);
+    console.error("GET Uploads List Error:", error);
     
     let status = 500;
     if (error.message === "Invalid Token" || error.message === "Authorization header missing") {
@@ -50,7 +48,7 @@ export async function GET(request) {
     return NextResponse.json(
       {
         success: false,
-        message: error.message || "Failed to retrieve invoices list",
+        message: error.message || "Failed to retrieve uploads list",
       },
       { status }
     );

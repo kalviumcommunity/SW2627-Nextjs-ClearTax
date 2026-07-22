@@ -28,7 +28,23 @@ export async function findUserById(id){
             email: true,
             name: true,
             role: true,
+            profilePicture: true,
             createdAt: true,
         },
+    })
+}
+
+export async function updateUser(id, data) {
+    return await prisma.user.update({
+        where: { id: parseInt(id) },
+        data,
+        select: {
+            id: true,
+            email: true,
+            name: true,
+            role: true,
+            profilePicture: true,
+            createdAt: true,
+        }
     })
 }

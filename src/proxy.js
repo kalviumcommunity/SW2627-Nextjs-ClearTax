@@ -10,7 +10,7 @@ const PRIVATE_PREFIXES = [
   "/settings",
 ];
 
-export function middleware(request) {
+export function proxy(request) {
   const { pathname } = request.nextUrl;
   const isAuthenticated = request.cookies.get("bip_auth")?.value === "1";
   const isPrivateRoute = PRIVATE_PREFIXES.some((prefix) =>

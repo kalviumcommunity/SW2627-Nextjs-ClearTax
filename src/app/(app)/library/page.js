@@ -4,25 +4,45 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { FileSpreadsheet, Loader2, Calendar, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { useAuthStore } from "@/store/auth.store";
 
 export default function LibraryPage() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const token = useAuthStore((state) => state.token);
 
   useEffect(() => {
     const fetchJobs = async () => {
-      // MOCK DATA STANDIN
-      setTimeout(() => {
-        setJobs([
-          { id: "1", createdAt: new Date(Date.now() - 86400000).toISOString(), totalRows: 25, status: "completed" },
-          { id: "2", createdAt: new Date(Date.now() - 172800000).toISOString(), totalRows: 95, status: "completed" },
-        ]);
+      try {
+        const headers = {};
+        if (token) {
+          headers["Authorization"] = `Bearer ${token}`;
+        }
+        const response = await fetch("/api/upload", { headers });
+        const data = await response.json();
+        
+        if (data.success) {
+          setJobs(data.data.map(batch => ({
+            id: batch.id,
+            createdAt: batch.createdAt,
+            totalRows: batch.totalRows,
+            status: batch.status.toLowerCase()
+          })));
+        }
+      } catch (err) {
+        console.error("Error fetching library batches:", err);
+      } finally {
         setLoading(false);
-      }, 700);
+      }
     };
-    fetchJobs();
-  }, []);
+
+    if (token) {
+      fetchJobs();
+    } else {
+      setLoading(false);
+    }
+  }, [token]);
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString("en-US", {
