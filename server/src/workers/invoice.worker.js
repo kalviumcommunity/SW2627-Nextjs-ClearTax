@@ -1,8 +1,8 @@
 import { Worker } from "bullmq";
 import fs from "fs";
 import Papa from "papaparse";
-import { redis } from "../lib/redis.js";
-import { prisma } from "../lib/prisma.js";
+import { createRedisClient } from "../config/redis.js";
+import { prisma } from "../config/prisma.js";
 import {
   createInvoice,
   updateUploadBatchProgress,
@@ -181,7 +181,7 @@ export function createInvoiceWorker() {
       }
     },
     {
-      connection: redis,
+      connection: createRedisClient(),
       concurrency: 1,
     }
   );
