@@ -1,4 +1,4 @@
-import { prisma } from "../lib/prisma.js";
+import { prisma } from "../config/prisma.js";
 
 /**
  * Creates a new UploadBatch record in the database.
