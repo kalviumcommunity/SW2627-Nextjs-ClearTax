@@ -9,7 +9,7 @@ import {
   deleteInvoicesByBatchId,
   updateUploadBatchProgress,
 } from "../repositories/upload.repository.js";
-import { invoiceQueue } from "@/queues/invoice.queue.js";
+import { invoiceQueue } from "../queues/invoice.queue.js";
 
 const uploadService = {
   /**
@@ -60,10 +60,13 @@ const uploadService = {
     };
   },
 
-  async getUploadStatus(uploadId) {
+  async getUploadStatus(uploadId, userId) {
     const batch = await getUploadBatchById(uploadId);
     if (!batch) {
       throw new Error("Upload batch not found");
+    }
+    if (userId && batch.userId !== parseInt(userId)) {
+      throw new Error("Forbidden");
     }
     return {
       uploadId: batch.id,
@@ -78,8 +81,8 @@ const uploadService = {
     };
   },
 
-  async getAllUploads() {
-    return await getAllUploadBatches();
+  async getAllUploads(userId) {
+    return await getAllUploadBatches(userId);
   },
 
   /**
@@ -99,10 +102,13 @@ const uploadService = {
   /**
    * Deletes old invoice records, resets progress metrics, and re-triggers background processing.
    */
-  async retryUploadBatch(uploadBatchId) {
+  async retryUploadBatch(uploadBatchId, userId) {
     const batch = await getUploadBatchById(uploadBatchId);
     if (!batch) {
       throw new Error("Upload batch not found");
+    }
+    if (userId && batch.userId !== parseInt(userId)) {
+      throw new Error("Forbidden");
     }
 
     // 1. Delete associated invoices

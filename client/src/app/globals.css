@@ -31,6 +31,7 @@
 }
 
 @layer base {
+
   *,
   *::before,
   *::after {
@@ -52,7 +53,12 @@
     color: var(--foreground);
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Outfit', sans-serif;
     letter-spacing: -0.02em;
   }

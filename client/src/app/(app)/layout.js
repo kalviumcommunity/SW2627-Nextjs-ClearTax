@@ -11,6 +11,8 @@ export default function AppLayout({ children }) {
   const router = useRouter();
   const pathname = usePathname();
   const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
+  const setUser = useAuthStore((state) => state.setUser);
   const clearUser = useAuthStore((state) => state.clearUser);
   const [mounted, setMounted] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -18,7 +20,33 @@ export default function AppLayout({ children }) {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+
+    const validateToken = async () => {
+      if (token) {
+        try {
+          const response = await fetch("/api/auth/me", {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+          const data = await response.json();
+          if (data.success && data.user) {
+            setUser(data.user);
+          } else {
+            clearUser();
+            router.push("/login");
+          }
+        } catch (err) {
+          console.error("Token verification failed:", err);
+        }
+      } else {
+        clearUser();
+        router.push("/login");
+      }
+    };
+
+    validateToken();
+  }, [token, setUser, clearUser, router]);
 
   // Handle clicking outside the dropdown to close it
   useEffect(() => {

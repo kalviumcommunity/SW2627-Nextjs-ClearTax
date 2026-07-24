@@ -91,8 +91,12 @@ export async function getUploadBatchById(id) {
 /**
  * Retrieves all UploadBatches with invoices and associated user details.
  */
-export async function getAllUploadBatches() {
+export async function getAllUploadBatches(userId) {
+  if (!userId) {
+    throw new Error("User ID is required to retrieve upload batches");
+  }
   return await prisma.uploadBatch.findMany({
+    where: { userId: parseInt(userId) },
     orderBy: { createdAt: "desc" },
     include: {
       invoices: true,
@@ -153,9 +157,10 @@ export async function getUploadBatchesWithPagination(options = {}) {
 
   const where = {};
   
-  if (userId) {
-    where.userId = parseInt(userId);
+  if (!userId) {
+    throw new Error("User ID is required for retrieving paginated upload batches");
   }
+  where.userId = parseInt(userId);
   
   if (status) {
     where.status = status;
@@ -225,11 +230,12 @@ export async function getInvoicesWithPagination(options = {}) {
     where.uploadBatchId = parseInt(uploadBatchId);
   }
 
-  if (userId) {
-    where.uploadBatch = {
-      userId: parseInt(userId),
-    };
+  if (!userId) {
+    throw new Error("User ID is required for retrieving paginated invoices");
   }
+  where.uploadBatch = {
+    userId: parseInt(userId),
+  };
 
   if (search) {
     where.OR = [
