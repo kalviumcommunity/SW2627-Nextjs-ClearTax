@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { FileSpreadsheet, Loader2, Calendar, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAuthStore } from "@/store/auth.store";
+import axios from "@/lib/axios";
 
 export default function LibraryPage() {
   const [jobs, setJobs] = useState([]);
@@ -15,12 +16,8 @@ export default function LibraryPage() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const headers = {};
-        if (token) {
-          headers["Authorization"] = `Bearer ${token}`;
-        }
-        const response = await fetch("/api/upload", { headers });
-        const data = await response.json();
+        const response = await axios.get("/upload");
+        const data = response.data;
         
         if (data.success) {
           setJobs(data.data.map(batch => ({

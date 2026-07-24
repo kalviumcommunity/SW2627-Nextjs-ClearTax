@@ -6,6 +6,7 @@ import { LayoutDashboard, FileSpreadsheet, History, Settings, User, FileText, Lo
 import { useAuthStore } from "@/store/auth.store";
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import axios from "@/lib/axios";
 
 export default function AppLayout({ children }) {
   const router = useRouter();
@@ -24,12 +25,8 @@ export default function AppLayout({ children }) {
     const validateToken = async () => {
       if (token) {
         try {
-          const response = await fetch("/api/auth/me", {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          });
-          const data = await response.json();
+          const response = await axios.get("/auth/me");
+          const data = response.data;
           if (data.success && data.user) {
             setUser(data.user);
           } else {
@@ -38,6 +35,8 @@ export default function AppLayout({ children }) {
           }
         } catch (err) {
           console.error("Token verification failed:", err);
+          clearUser();
+          router.push("/login");
         }
       } else {
         clearUser();
