@@ -4,17 +4,19 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
-    "postinstall": "prisma generate",
-    "prisma:generate": "prisma generate",
-    "prisma:init": "prisma init --datasource-provider postgresql",
-    "prisma:format": "prisma format",
-    "prisma:validate": "prisma validate",
-    "prisma:migrate": "prisma migrate dev",
-    "prisma:push": "prisma db push",
-    "prisma:studio": "prisma studio"
-  },
+  "start": "node src/server.js",
+  "dev": "nodemon src/server.js",
+  "build": "prisma generate",
+  "postinstall": "prisma generate",
+
+  "prisma:generate": "prisma generate",
+  "prisma:init": "prisma init --datasource-provider postgresql",
+  "prisma:format": "prisma format",
+  "prisma:validate": "prisma validate",
+  "prisma:migrate": "prisma migrate dev",
+  "prisma:push": "prisma db push",
+  "prisma:studio": "prisma studio"
+},
   "dependencies": {
     "@prisma/client": "^6.16.3",
     "bcryptjs": "^3.0.3",
