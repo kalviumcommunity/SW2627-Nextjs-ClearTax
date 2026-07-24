@@ -69,7 +69,7 @@ export default function Home() {
 
       <main className="landing-page relative z-10">
         {/* Hero Panel Section */}
-        <motion.section 
+        <motion.section
           className="hero-panel mb-16"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -78,7 +78,7 @@ export default function Home() {
           <div className="hero-layout">
             <div className="hero-split items-center lg:items-stretch">
               <div className="hero-content flex flex-col justify-center">
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2, duration: 0.5 }}
@@ -87,16 +87,16 @@ export default function Home() {
                   <span className="w-1.5 h-1.5 rounded-full bg-[#5a38ef] animate-pulse"></span>
                   <span className="text-xs font-semibold text-[#5a38ef] tracking-wide uppercase">New Release v1.0</span>
                 </motion.div>
-                
+
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#1c1834] max-w-xl mb-6 leading-[1.08] font-outfit">
                   Process Thousands of Invoices in <span className="gradient-text">Minutes</span>
                 </h1>
-                
+
                 <p className="text-base md:text-lg text-stone-500 max-w-md mb-8 leading-relaxed font-sans">
                   Upload CSV invoices and process them asynchronously with real-time
                   tracking, review workflows, and reporting built for finance teams.
                 </p>
-                
+
                 <div className="flex flex-wrap gap-4">
                   <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                     <Link className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-semibold text-white bg-[#5a38ef] rounded-full hover:bg-[#401fd6] transition-all shadow-md hover:shadow-lg shadow-indigo-500/10" href="/signup">
@@ -121,7 +121,7 @@ export default function Home() {
                   <p className="metric-value">25k+</p>
                   <span className="absolute bottom-0 left-0 w-full h-[3px] bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
                 </div>
-                
+
                 <div className="metric-item cursor-default flex flex-col justify-between relative overflow-hidden group">
                   <div className="flex justify-between items-center mb-1">
                     <p className="metric-label">Success Rate</p>
@@ -130,7 +130,7 @@ export default function Home() {
                   <p className="metric-value text-emerald-500">98.6%</p>
                   <span className="absolute bottom-0 left-0 w-full h-[3px] bg-[#10b981] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
                 </div>
-                
+
                 <div className="metric-item cursor-default flex flex-col justify-between relative overflow-hidden group">
                   <div className="flex justify-between items-center mb-1">
                     <p className="metric-label">Active Jobs</p>
@@ -139,7 +139,7 @@ export default function Home() {
                   <p className="metric-value">128</p>
                   <span className="absolute bottom-0 left-0 w-full h-[3px] bg-indigo-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
                 </div>
-                
+
                 <div className="metric-item cursor-default flex flex-col justify-between relative overflow-hidden group">
                   <div className="flex justify-between items-center mb-1">
                     <p className="metric-label">Needs Review</p>
@@ -154,9 +154,9 @@ export default function Home() {
         </motion.section>
 
         {/* Feature Bento Grid Section */}
-        <motion.section 
-          id="features" 
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 relative z-10" 
+        <motion.section
+          id="features"
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 relative z-10"
           aria-label="Features"
           variants={containerVariants}
           initial="hidden"
@@ -164,8 +164,8 @@ export default function Home() {
           viewport={{ once: true, margin: "-100px" }}
         >
           {features.map(({ title, description, icon: Icon }) => (
-            <motion.article 
-              key={title} 
+            <motion.article
+              key={title}
               variants={itemVariants}
               className="glass-card p-7 flex flex-col gap-3 relative overflow-hidden group cursor-default"
             >
@@ -179,8 +179,8 @@ export default function Home() {
         </motion.section>
 
         {/* How It Works Grid Section */}
-        <motion.section 
-          id="pricing" 
+        <motion.section
+          id="pricing"
           className="glass-card mb-16 p-10 relative overflow-hidden cursor-default"
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -204,8 +204,8 @@ export default function Home() {
         </motion.section>
 
         {/* About Section */}
-        <motion.section 
-          id="about" 
+        <motion.section
+          id="about"
           className="glass-card p-10 mb-8 relative overflow-hidden cursor-default"
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}

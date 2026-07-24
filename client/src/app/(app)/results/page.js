@@ -6,6 +6,7 @@ import { CheckCircle2, XCircle, AlertTriangle, FileSpreadsheet, Download, Loader
 import Papa from "papaparse";
 import { motion } from "framer-motion";
 import { useAuthStore } from "@/store/auth.store";
+import axios from "@/lib/axios";
 
 function ResultsContent() {
   const searchParams = useSearchParams();
@@ -22,12 +23,8 @@ function ResultsContent() {
 
     const fetchJob = async (id) => {
       try {
-        const headers = {};
-        if (token) {
-          headers["Authorization"] = `Bearer ${token}`;
-        }
-        const response = await fetch(`/api/upload/${id}`, { headers });
-        const data = await response.json();
+        const response = await axios.get(`/upload/${id}`);
+        const data = response.data;
         
         if (data.success) {
           const batch = data.data;
@@ -58,7 +55,7 @@ function ResultsContent() {
         }
       } catch (err) {
         console.error(err);
-        setError("An error occurred while fetching job details");
+        setError(err.response?.data?.message || "An error occurred while fetching job details");
       } finally {
         setLoading(false);
       }
@@ -66,12 +63,8 @@ function ResultsContent() {
 
     const fetchAllJobs = async () => {
       try {
-        const headers = {};
-        if (token) {
-          headers["Authorization"] = `Bearer ${token}`;
-        }
-        const response = await fetch("/api/upload", { headers });
-        const data = await response.json();
+        const response = await axios.get("/upload");
+        const data = response.data;
         
         if (data.success) {
           setJobs(data.data.map(batch => ({
@@ -85,7 +78,7 @@ function ResultsContent() {
         }
       } catch (err) {
         console.error(err);
-        setError("An error occurred while fetching uploads");
+        setError(err.response?.data?.message || "An error occurred while fetching uploads");
       } finally {
         setLoading(false);
       }
