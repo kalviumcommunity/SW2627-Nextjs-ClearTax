@@ -12,7 +12,7 @@
     "dev:server": "npm run dev --workspace=server",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
     "build:client": "npm run build --workspace=client",
-    "postinstall": "npm run prisma:generate --workspace=server",
+    "postinstall": "node scripts/postinstall.js",
     "prisma:generate": "npm run prisma:generate --workspace=server",
     "prisma:migrate": "npm run prisma:migrate --workspace=server",
     "prisma:push": "npm run prisma:push --workspace=server",
