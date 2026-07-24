@@ -5,6 +5,7 @@ import { UploadCloud, File, AlertCircle, CheckCircle2, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useAuthStore } from "@/store/auth.store";
+import axios from "@/lib/axios";
 
 export default function UploadPage() {
   const [files, setFiles] = useState([]);
@@ -77,20 +78,15 @@ export default function UploadPage() {
         const formData = new FormData();
         formData.append("file", file);
 
-        const headers = {};
-        if (token) {
-          headers["Authorization"] = `Bearer ${token}`;
-        }
-
-        const response = await fetch("/api/upload", {
-          method: "POST",
-          headers,
-          body: formData,
+        const response = await axios.post("/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         });
 
-        const data = await response.json();
+        const data = response.data;
 
-        if (!response.ok || !data.success) {
+        if (!data.success) {
           throw new Error(data.message || `Failed to upload ${file.name}`);
         }
 

@@ -5,6 +5,7 @@ import { User, Lock, Mail, Save, AlertCircle, CheckCircle2, Camera, Loader2 } fr
 import { motion } from "framer-motion";
 import { useAuthStore } from "@/store/auth.store";
 import { toast } from "sonner";
+import axios from "@/lib/axios";
 
 export default function ProfilePage() {
   const user = useAuthStore((state) => state.user);
@@ -54,16 +55,14 @@ export default function ProfilePage() {
         formData.append("profilePicture", avatarFile);
       }
 
-      const response = await fetch("/api/auth/me", {
-        method: "PUT",
+      const response = await axios.put("/auth/me", formData, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
         },
-        body: formData,
       });
 
-      const data = await response.json();
-      if (!response.ok || !data.success) {
+      const data = response.data;
+      if (!data.success) {
         throw new Error(data.message || "Failed to update profile details.");
       }
 
@@ -86,20 +85,13 @@ export default function ProfilePage() {
     setPassStatus({ loading: true, error: null, success: false });
 
     try {
-      const response = await fetch("/api/auth/me", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          oldPassword: passwordForm.oldPassword,
-          newPassword: passwordForm.newPassword,
-        }),
+      const response = await axios.put("/auth/me", {
+        oldPassword: passwordForm.oldPassword,
+        newPassword: passwordForm.newPassword,
       });
 
-      const data = await response.json();
-      if (!response.ok || !data.success) {
+      const data = response.data;
+      if (!data.success) {
         throw new Error(data.message || "Failed to update password.");
       }
 
