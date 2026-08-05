@@ -38,7 +38,7 @@ A high-performance, fault-tolerant monorepo web application designed to handle *
 | Role | Name |
 | :--- | :--- |
 | **Team Leader** 👑 | **Payal Vats** |
-| **Team Member** 💻 | **Nirbhay Jakhar** |
+| **Team Member**  | **Nirbhay Jakhar ** |
 | **Team Member** 💻 | **Priyanshu Dolwani** |
 
 ---
