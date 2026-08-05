@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - master
+      - chore/readme
   pull_request:
     branches:
       - main
@@ -33,6 +34,10 @@ jobs:
 
       - name: Build Project
         run: npm run build
+        env:
+          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/cleartax?schema=public"
+          JWT_SECRET: "ci_jwt_secret_key_12345"
+          REDIS_URL: "redis://localhost:6379"
 
   deploy:
     name: Continuous Deployment
