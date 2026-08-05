@@ -1,5 +1,5 @@
-import { login } from "@/services/auth.service.js";
-import { loginSchema } from "@/validations/auth.validation.js";
+import { login } from "../../../../services/auth.service.js";
+import { loginSchema } from "../../../../validations/auth.validation.js";
 
 export async function POST(request) {
   try {

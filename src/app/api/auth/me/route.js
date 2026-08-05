@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs";
-import { getCurrentUser, updateUserProfile } from "@/services/auth.service.js";
-import { authenticateUser } from "@/middleware/auth.middleware.js";
+import { getCurrentUser, updateUserProfile } from "../../../../services/auth.service.js";
+import { authenticateUser } from "../../../../middleware/auth.middleware.js";
 
 export async function GET(request) {
   try {

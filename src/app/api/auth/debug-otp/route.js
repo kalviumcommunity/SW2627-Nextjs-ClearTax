@@ -1,4 +1,4 @@
-import { otpStore } from "@/services/auth.service.js";
+import { otpStore } from "../../../../services/auth.service.js";
 
 export async function GET(request) {
   if (process.env.NODE_ENV === "production") {

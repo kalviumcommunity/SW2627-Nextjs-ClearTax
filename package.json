@@ -6,8 +6,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",
+    "build:client": "next build",
+    "build:server": "prisma generate",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "next lint",
+    "test": "echo \"No tests configured\"",
     "worker": "node src/workers/run-worker.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
