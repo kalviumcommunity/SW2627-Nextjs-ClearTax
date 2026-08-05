@@ -1,4 +1,4 @@
-import { verifyOTP } from "@/services/auth.service.js";
+import { verifyOTP } from "../../../../services/auth.service.js";
 
 export async function POST(request) {
   try {

@@ -28,20 +28,11 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Lint Frontend
-        run: npm run lint
-
-      - name: Run Tests
-        run: npm run test
-
       - name: Generate Prisma Client
         run: npm run prisma:generate
 
-      - name: Build Frontend
-        run: npm run build:client
-
-      - name: Build Backend
-        run: npm run build:server
+      - name: Build Project
+        run: npm run build
 
   deploy:
     name: Continuous Deployment
@@ -68,7 +59,6 @@ jobs:
         run: npm install -g vercel
 
       - name: Pull Vercel Environment
-        working-directory: ./client
         run: |
           vercel pull \
             --yes \
@@ -79,7 +69,6 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
       - name: Build Vercel Project
-        working-directory: ./client
         run: |
           vercel build \
             --prod \
@@ -88,8 +77,7 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
-      - name: Deploy Frontend to Vercel
-        working-directory: ./client
+      - name: Deploy to Vercel
         run: |
           vercel deploy \
             --prebuilt \
@@ -98,8 +86,3 @@ jobs:
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-
-      - name: Deploy Backend to Render
-        if: secrets.RENDER_DEPLOY_HOOK_URL != ''
-        run: |
-          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"

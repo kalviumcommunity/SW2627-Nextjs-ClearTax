@@ -1,4 +1,4 @@
-import { resetPassword } from "@/services/auth.service.js";
+import { resetPassword } from "../../../../services/auth.service.js";
 
 export async function POST(request) {
   try {
