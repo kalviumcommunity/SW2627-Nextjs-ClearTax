@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Bell, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { APP_ROUTES } from "../../constants/routes";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -49,14 +49,6 @@ export default function Navbar() {
         </nav>
  
         <div className="marketing-nav__actions hidden md:flex">
-          <motion.div
-            whileHover={{ scale: 1.05, rotate: 3 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Link href={APP_ROUTES.NOTIFICATIONS} className="marketing-nav__icon-button" aria-label="Notifications">
-              <Bell className="h-4 w-4 text-stone-500 hover:text-[#5a38ef] transition-colors" />
-            </Link>
-          </motion.div>
           <Link href={APP_ROUTES.LOGIN} className="marketing-nav__ghost">
             Login
           </Link>
@@ -72,13 +64,6 @@ export default function Navbar() {
 
         {/* Mobile controls */}
         <div className="flex md:hidden items-center gap-3">
-          <motion.div
-            whileTap={{ scale: 0.95 }}
-          >
-            <Link href={APP_ROUTES.NOTIFICATIONS} className="marketing-nav__icon-button" aria-label="Notifications">
-              <Bell className="h-4.5 w-4.5 text-stone-500" />
-            </Link>
-          </motion.div>
           <motion.button 
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(!isOpen)} 

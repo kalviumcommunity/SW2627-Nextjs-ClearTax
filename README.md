@@ -1,4 +1,32 @@
+<<<<<<< HEAD
 # ClearTax — Bulk Invoice Processing System 🚀
+=======
+# ClearTax
+
+A responsive bulk invoice upload system that enables users to upload invoice data via CSV and process it asynchronously in the background.
+
+## Features
+
+* 📄 Upload invoices using CSV files
+* ⚡ Background processing with real-time progress tracking
+* 🔄 Independent row processing (failed rows don't stop the upload)
+* ✅ Match / ❌ Mismatch status for every invoice
+* 🚨 Row-level error messages for validation failures
+* 📋 Scrollable results table for reviewing processed invoices
+* 📱 Fully responsive UI optimized for mobile and desktop
+
+## Workflow
+
+1. Upload a CSV file or a bulk CSV folder.
+2. Processing starts in the background.
+3. Track progress in real time.
+4. Review processed invoices in the results table.
+5. Fix and re-upload only the invoices that failed.
+
+This implementation ensures fast, reliable, and fault-tolerant bulk invoice processing while providing clear feedback for every uploaded record.
+
+ClearTax is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+>>>>>>> 2eef214f1b51ae9dbc5454726a67a8c65cec4e40
 
 A high-performance, fault-tolerant monorepo web application designed to handle **bulk CSV invoice uploads** with **asynchronous background processing**, **real-time Server-Sent Events (SSE) progress tracking**, and a **dynamic interactive UI**.
 
