@@ -28,14 +28,6 @@ This implementation ensures fast, reliable, and fault-tolerant bulk invoice proc
 ClearTax is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 >>>>>>> 2eef214f1b51ae9dbc5454726a67a8c65cec4e40
 
-[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
-[![Express.js](https://img.shields.io/badge/Express.js-4-000000?style=for-the-badge&logo=express)](https://expressjs.com/)
-[![Prisma](https://img.shields.io/badge/Prisma-6-2D3748?style=for-the-badge&logo=prisma)](https://www.prisma.io/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15+-4169E1?style=for-the-badge&logo=postgresql)](https://www.postgresql.org/)
-[![Redis](https://img.shields.io/badge/Redis-BullMQ-DC382D?style=for-the-badge&logo=redis)](https://redis.io/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=for-the-badge&logo=tailwindcss)](https://tailwindcss.com/)
-
 A high-performance, fault-tolerant monorepo web application designed to handle **bulk CSV invoice uploads** with **asynchronous background processing**, **real-time Server-Sent Events (SSE) progress tracking**, and a **dynamic interactive UI**.
 
 ---
@@ -163,7 +155,7 @@ Ensure you have the following installed on your local environment:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-org/clearTax.git
+   git clone https://github.com/https://github.com/kalviumcommunity/SW2627-Nextjs-ClearTax.git/clearTax.git
    cd clearTax
    ```
 
