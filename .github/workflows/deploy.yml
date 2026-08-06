@@ -43,7 +43,7 @@ jobs:
     name: Continuous Deployment
     needs: ci
 
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/chore/readme')
 
     runs-on: ubuntu-latest
 
@@ -65,6 +65,7 @@ jobs:
 
       - name: Pull Vercel Environment
         run: |
+          rm -rf .vercel
           vercel pull \
             --yes \
             --environment=production \
