@@ -1,0 +1,1001 @@
+Invoice Number,Vendor,Amount
+INV-000001,Cyberdyne Systems,858.62
+INV-000002,Massive Dynamic,396.08
+INV-000003,Globex,514.84
+INV-000004,Stark Industries,173.80
+INV-000005,Soylent Corp,775.98
+INV-000006,Cyberdyne Systems,662.02
+INV-000007,Massive Dynamic,229.00
+INV-000008,Massive Dynamic,594.39
+INV-000009,Stark Industries,802.90
+INV-000010,Soylent Corp,747.94
+INV-000011,Massive Dynamic,-76.89
+INV-000012,Globex,117.57
+INV-000013,Stark Industries,114.46
+INV-000014,,237.30
+INV-000015,Initech,920.07
+INV-000016,Massive Dynamic,712.71
+INV-000017,Wayne Enterprises,322.34
+INV-000018,Soylent Corp,800.48
+INV-000019,Massive Dynamic,614.38
+INV-000020,Initech,154.29
+INV-000021,Soylent Corp,340.65
+INV-000022,Acme Corp,944.13
+INV-000023,Cyberdyne Systems,872.11
+INV-000024,Cyberdyne Systems,-489.83
+INV-000025,Initech,47.50
+INV-000026,Massive Dynamic,670.06
+INV-000027,Wayne Enterprises,672.78
+INV-000028,Soylent Corp,746.24
+INV-000029,Massive Dynamic,979.50
+INV-000030,Acme Corp,124.90
+INV-000031,Wayne Enterprises,778.17
+INV-000032,Massive Dynamic,773.78
+INV-000033,Soylent Corp,-429.87
+INV-000034,Globex,793.26
+INV-000035,Globex,787.56
+INV-000036,Acme Corp,348.08
+INV-000037,Globex,285.13
+INV-000038,Wayne Enterprises,877.57
+INV-000039,Globex,725.33
+INV-000040,Acme Corp,653.40
+INV-000041,Acme Corp,958.20
+INV-000042,Soylent Corp,347.73
+INV-000043,Acme Corp,760.11
+INV-000044,Soylent Corp,432.45
+INV-000045,,454.10
+INV-000046,Globex,1005.01
+INV-000047,Acme Corp,165.03
+INV-000048,Soylent Corp,11.26
+INV-000049,Initech,267.99
+INV-000050,Stark Industries,193.08
+INV-000051,Wayne Enterprises,107.95
+INV-000052,Acme Corp,517.96
+INV-000053,Wayne Enterprises,761.93
+INV-000054,Wayne Enterprises,726.59
+INV-000055,Initech,953.79
+INV-000056,Initech,472.65
+INV-000057,Wayne Enterprises,666.23
+INV-000058,Stark Industries,368.95
+INV-000059,Cyberdyne Systems,340.74
+INV-000060,Globex,268.65
+INV-000061,Acme Corp,362.58
+INV-000062,Cyberdyne Systems,122.18
+INV-000063,Massive Dynamic,964.71
+INV-000064,Cyberdyne Systems,431.16
+INV-000065,Soylent Corp,93.10
+INV-000066,Cyberdyne Systems,460.39
+INV-000067,Acme Corp,846.59
+INV-000068,Acme Corp,700.96
+INV-000069,Wayne Enterprises,689.25
+INV-000070,Acme Corp,862.89
+INV-000071,Wayne Enterprises,993.89
+INV-000072,Acme Corp,280.60
+INV-000073,Cyberdyne Systems,31.75
+INV-000074,Initech,216.33
+INV-000075,Soylent Corp,480.94
+INV-000076,Globex,403.51
+INV-000077,Globex,913.02
+INV-000078,Globex,896.24
+INV-000079,Globex,48.90
+INV-000080,Acme Corp,800.91
+INV-000081,Massive Dynamic,736.02
+INV-000082,Acme Corp,417.74
+INV-000083,Stark Industries,901.98
+INV-000084,Soylent Corp,828.00
+INV-000085,Wayne Enterprises,768.94
+INV-000086,Acme Corp,48.13
+INV-000087,Cyberdyne Systems,473.84
+INV-000088,Massive Dynamic,327.47
+INV-000089,Massive Dynamic,56.02
+INV-000090,Wayne Enterprises,762.21
+INV-000091,Globex,515.56
+INV-000092,Initech,743.78
+INV-000093,Soylent Corp,650.00
+INV-000094,Stark Industries,567.13
+INV-000095,Massive Dynamic,-404.18
+INV-000096,Stark Industries,460.71
+INV-000097,Initech,903.57
+INV-000098,Soylent Corp,728.83
+INV-000099,Stark Industries,98.18
+INV-000100,Acme Corp,418.03
+INV-000101,Globex,627.86
+INV-000102,,418.07
+INV-000103,Initech,849.42
+INV-000104,Soylent Corp,605.59
+INV-000105,Initech,122.84
+INV-000106,Stark Industries,598.05
+INV-000107,Massive Dynamic,602.82
+INV-000108,Stark Industries,503.62
+INV-000109,Acme Corp,100.75
+INV-000110,Soylent Corp,551.63
+INV-000111,Wayne Enterprises,117.80
+INV-000112,,165.35
+INV-000113,Acme Corp,470.85
+INV-000114,Stark Industries,989.02
+INV-000115,Wayne Enterprises,238.16
+INV-000116,Acme Corp,490.28
+INV-000117,Soylent Corp,388.76
+INV-000118,Acme Corp,477.72
+INV-000119,Initech,788.89
+INV-000120,Initech,773.50
+INV-000121,Acme Corp,170.83
+INV-000122,Cyberdyne Systems,39.42
+INV-000123,Acme Corp,612.68
+INV-000124,Globex,505.04
+INV-000125,Cyberdyne Systems,-38.17
+INV-000126,,648.32
+INV-000127,Soylent Corp,449.94
+INV-000128,Stark Industries,-80.35
+INV-000129,Massive Dynamic,354.98
+INV-000130,Acme Corp,985.66
+INV-000131,Wayne Enterprises,523.32
+INV-000132,Initech,427.02
+INV-000133,Wayne Enterprises,459.98
+INV-000134,Wayne Enterprises,348.10
+INV-000135,Initech,967.82
+INV-000136,Soylent Corp,-252.77
+INV-000137,Globex,570.17
+INV-000138,Soylent Corp,36.00
+INV-000139,Wayne Enterprises,-411.27
+INV-000140,Stark Industries,29.89
+INV-000141,Initech,238.08
+INV-000142,Stark Industries,723.17
+INV-000143,Acme Corp,971.62
+INV-000144,Acme Corp,357.39
+INV-000145,Massive Dynamic,433.69
+INV-000146,Massive Dynamic,194.56
+INV-000147,Wayne Enterprises,565.95
+INV-000148,Soylent Corp,747.47
+INV-000149,Cyberdyne Systems,695.59
+INV-000150,Initech,855.80
+INV-000151,Globex,793.65
+INV-000152,Initech,310.56
+INV-000153,Acme Corp,755.93
+INV-000154,Globex,515.06
+INV-000155,Cyberdyne Systems,531.76
+INV-000156,Massive Dynamic,-6.14
+INV-000157,Acme Corp,162.61
+INV-000158,Cyberdyne Systems,263.26
+INV-000159,Soylent Corp,841.82
+INV-000160,Globex,279.37
+INV-000161,Initech,10.87
+INV-000162,Massive Dynamic,485.85
+INV-000163,Cyberdyne Systems,874.66
+INV-000164,Soylent Corp,353.89
+INV-000165,Globex,273.64
+INV-000166,Initech,865.74
+INV-000167,Soylent Corp,230.30
+INV-000168,Initech,801.18
+INV-000169,Soylent Corp,647.09
+INV-000170,Massive Dynamic,91.28
+INV-000171,Cyberdyne Systems,677.02
+INV-000172,Wayne Enterprises,375.03
+INV-000173,Cyberdyne Systems,445.38
+INV-000174,Soylent Corp,348.80
+INV-000175,Globex,-207.04
+INV-000176,Wayne Enterprises,884.26
+INV-000177,Globex,497.95
+INV-000178,Stark Industries,715.39
+INV-000179,Wayne Enterprises,480.16
+INV-000180,Globex,622.66
+INV-000181,Massive Dynamic,421.34
+INV-000182,Soylent Corp,688.29
+INV-000183,Initech,832.24
+INV-000184,Wayne Enterprises,777.71
+INV-000185,Stark Industries,877.33
+INV-000186,Acme Corp,994.87
+INV-000187,Stark Industries,679.11
+INV-000188,Soylent Corp,246.91
+INV-000189,Initech,346.97
+INV-000190,,285.40
+INV-000191,Acme Corp,88.85
+INV-000192,Cyberdyne Systems,383.92
+INV-000193,Wayne Enterprises,562.30
+INV-000194,Initech,598.27
+INV-000195,Acme Corp,897.44
+INV-000196,Soylent Corp,118.88
+INV-000197,Stark Industries,-89.56
+INV-000198,Stark Industries,400.09
+INV-000199,Wayne Enterprises,673.46
+INV-000200,,975.03
+INV-000201,Globex,305.48
+INV-000202,Stark Industries,224.32
+INV-000203,Cyberdyne Systems,866.76
+INV-000204,Acme Corp,289.40
+INV-000205,Massive Dynamic,898.16
+INV-000206,Massive Dynamic,910.61
+INV-000207,Cyberdyne Systems,888.02
+INV-000208,Initech,-357.10
+INV-000209,Wayne Enterprises,1002.22
+INV-000210,Wayne Enterprises,131.01
+INV-000211,Stark Industries,136.98
+INV-000212,Acme Corp,850.60
+INV-000213,Acme Corp,153.89
+INV-000214,Initech,128.86
+INV-000215,Cyberdyne Systems,784.57
+INV-000216,Initech,481.27
+INV-000217,Cyberdyne Systems,153.80
+INV-000218,Initech,646.05
+INV-000219,Soylent Corp,822.13
+INV-000220,Wayne Enterprises,742.15
+INV-000221,Soylent Corp,600.12
+INV-000222,Initech,184.21
+INV-000223,Soylent Corp,462.08
+INV-000224,Soylent Corp,-287.99
+INV-000225,Cyberdyne Systems,797.30
+INV-000226,Globex,268.98
+INV-000227,Stark Industries,718.46
+INV-000228,Cyberdyne Systems,803.86
+INV-000229,Initech,393.45
+INV-000230,Wayne Enterprises,860.16
+INV-000231,Initech,986.86
+INV-000232,Massive Dynamic,-136.04
+INV-000233,Initech,272.84
+INV-000234,Massive Dynamic,657.54
+INV-000235,Soylent Corp,949.65
+INV-000236,Wayne Enterprises,40.61
+INV-000237,Stark Industries,-488.25
+INV-000238,Soylent Corp,619.79
+INV-000239,Globex,135.62
+INV-000240,Acme Corp,307.97
+INV-000241,Initech,752.19
+INV-000242,Initech,31.04
+INV-000243,Initech,356.54
+INV-000244,Massive Dynamic,662.51
+INV-000245,Globex,967.08
+INV-000246,Cyberdyne Systems,401.14
+INV-000247,Massive Dynamic,623.97
+INV-000248,Soylent Corp,165.40
+INV-000249,Wayne Enterprises,375.28
+INV-000250,Acme Corp,776.90
+INV-000251,Cyberdyne Systems,177.12
+INV-000252,Initech,969.44
+INV-000253,Soylent Corp,404.76
+INV-000254,Globex,550.30
+INV-000255,Wayne Enterprises,12.94
+INV-000256,Cyberdyne Systems,999.28
+INV-000257,Wayne Enterprises,538.02
+INV-000258,Massive Dynamic,871.82
+INV-000259,Cyberdyne Systems,203.95
+INV-000260,,133.61
+INV-000261,Globex,752.11
+INV-000262,Globex,954.51
+INV-000263,,-449.54
+INV-000264,Initech,959.25
+INV-000265,Cyberdyne Systems,72.93
+INV-000266,Initech,805.21
+INV-000267,Wayne Enterprises,819.05
+INV-000268,Globex,239.22
+INV-000269,Soylent Corp,19.03
+INV-000270,,-177.12
+INV-000271,Massive Dynamic,397.71
+INV-000272,Soylent Corp,156.63
+INV-000273,Stark Industries,854.37
+INV-000274,Soylent Corp,534.39
+INV-000275,Initech,561.55
+INV-000276,Initech,188.25
+INV-000277,,886.86
+INV-000278,Cyberdyne Systems,166.20
+INV-000279,Globex,227.82
+INV-000280,Wayne Enterprises,975.63
+INV-000281,Cyberdyne Systems,868.97
+INV-000282,Wayne Enterprises,275.63
+INV-000283,Massive Dynamic,483.67
+INV-000284,Acme Corp,739.05
+INV-000285,Acme Corp,824.38
+INV-000286,Wayne Enterprises,135.80
+INV-000287,Massive Dynamic,914.10
+INV-000288,Stark Industries,802.40
+INV-000289,Globex,991.55
+INV-000290,Acme Corp,55.41
+INV-000291,Stark Industries,397.59
+INV-000292,Stark Industries,366.83
+INV-000293,Soylent Corp,545.43
+INV-000294,Initech,31.54
+INV-000295,Initech,784.09
+INV-000296,Acme Corp,916.63
+INV-000297,Initech,852.91
+INV-000298,Stark Industries,523.80
+INV-000299,Initech,457.86
+INV-000300,Globex,619.85
+INV-000301,Globex,742.38
+INV-000302,Massive Dynamic,185.68
+INV-000303,Soylent Corp,676.79
+INV-000304,Cyberdyne Systems,331.98
+INV-000305,Massive Dynamic,200.41
+INV-000306,Soylent Corp,695.61
+INV-000307,Soylent Corp,807.67
+INV-000308,Acme Corp,341.50
+INV-000309,Soylent Corp,416.24
+INV-000310,Wayne Enterprises,164.59
+INV-000311,Soylent Corp,377.26
+INV-000312,Globex,141.70
+INV-000313,Wayne Enterprises,274.09
+INV-000314,Soylent Corp,474.33
+INV-000315,Globex,-402.41
+INV-000316,Cyberdyne Systems,159.32
+INV-000317,Initech,362.12
+INV-000318,Soylent Corp,587.72
+INV-000319,Massive Dynamic,33.35
+INV-000320,Stark Industries,414.06
+INV-000321,Cyberdyne Systems,773.22
+INV-000322,Cyberdyne Systems,189.78
+INV-000323,Acme Corp,836.37
+INV-000324,Wayne Enterprises,554.61
+INV-000325,Cyberdyne Systems,658.03
+INV-000326,Acme Corp,25.62
+INV-000327,Stark Industries,739.01
+INV-000328,Globex,513.74
+INV-000329,Soylent Corp,529.53
+INV-000330,Stark Industries,431.88
+INV-000331,Cyberdyne Systems,93.50
+INV-000332,Initech,694.95
+INV-000333,Cyberdyne Systems,147.80
+INV-000334,Cyberdyne Systems,217.58
+INV-000335,Massive Dynamic,643.59
+INV-000336,Acme Corp,982.32
+INV-000337,Massive Dynamic,347.92
+INV-000338,Soylent Corp,251.01
+INV-000339,Cyberdyne Systems,328.81
+INV-000340,Wayne Enterprises,391.79
+INV-000341,Stark Industries,523.32
+INV-000342,Massive Dynamic,793.07
+INV-000343,Cyberdyne Systems,341.86
+INV-000344,Massive Dynamic,313.55
+INV-000345,Massive Dynamic,291.60
+INV-000346,Globex,331.77
+INV-000347,Globex,982.62
+INV-000348,Acme Corp,634.57
+INV-000349,Soylent Corp,394.95
+INV-000350,Wayne Enterprises,357.92
+INV-000351,Initech,684.67
+INV-000352,Massive Dynamic,505.44
+INV-000353,Massive Dynamic,511.86
+INV-000354,Massive Dynamic,429.38
+INV-000355,Wayne Enterprises,1001.29
+INV-000356,Globex,628.57
+INV-000357,Massive Dynamic,944.42
+INV-000358,Acme Corp,874.96
+INV-000359,Cyberdyne Systems,187.44
+INV-000360,Wayne Enterprises,434.98
+INV-000361,Acme Corp,612.19
+INV-000362,Cyberdyne Systems,97.63
+INV-000363,Stark Industries,173.76
+INV-000364,Cyberdyne Systems,276.03
+INV-000365,Wayne Enterprises,562.61
+INV-000366,Wayne Enterprises,746.08
+INV-000367,Soylent Corp,-433.04
+INV-000368,Acme Corp,539.92
+INV-000369,Globex,286.92
+INV-000370,Wayne Enterprises,713.34
+INV-000371,Wayne Enterprises,336.90
+INV-000372,Massive Dynamic,448.46
+INV-000373,Acme Corp,-46.02
+INV-000374,Massive Dynamic,215.81
+INV-000375,Acme Corp,647.47
+INV-000376,Cyberdyne Systems,736.32
+INV-000377,Initech,248.44
+INV-000378,Initech,471.78
+INV-000379,Initech,446.89
+INV-000380,Cyberdyne Systems,258.75
+INV-000381,Wayne Enterprises,-24.30
+INV-000382,Wayne Enterprises,458.64
+INV-000383,Stark Industries,861.66
+INV-000384,Cyberdyne Systems,864.68
+INV-000385,,160.83
+INV-000386,Initech,495.30
+INV-000387,Globex,541.19
+INV-000388,Cyberdyne Systems,310.34
+INV-000389,Acme Corp,523.42
+INV-000390,Stark Industries,360.02
+INV-000391,,553.86
+INV-000392,Soylent Corp,207.09
+INV-000393,Wayne Enterprises,521.05
+INV-000394,Soylent Corp,186.07
+INV-000395,Stark Industries,495.80
+INV-000396,,149.55
+INV-000397,,692.67
+INV-000398,Stark Industries,866.62
+INV-000399,Cyberdyne Systems,625.59
+INV-000400,Stark Industries,538.65
+INV-000401,Soylent Corp,-136.29
+INV-000402,Stark Industries,116.52
+INV-000403,Cyberdyne Systems,793.90
+INV-000404,Wayne Enterprises,696.85
+INV-000405,,139.29
+INV-000406,Stark Industries,280.38
+INV-000407,Globex,267.74
+INV-000408,Globex,863.52
+INV-000409,Massive Dynamic,408.52
+INV-000410,Massive Dynamic,359.43
+INV-000411,,313.56
+INV-000412,Initech,485.72
+INV-000413,Wayne Enterprises,332.58
+INV-000414,Soylent Corp,504.21
+INV-000415,Globex,376.38
+INV-000416,Stark Industries,736.03
+INV-000417,Acme Corp,870.39
+INV-000418,Wayne Enterprises,267.95
+INV-000419,Initech,797.19
+INV-000420,,58.89
+INV-000421,Massive Dynamic,558.14
+INV-000422,,677.78
+INV-000423,Acme Corp,603.47
+INV-000424,Initech,806.92
+INV-000425,Initech,826.83
+INV-000426,,989.43
+INV-000427,Wayne Enterprises,62.32
+INV-000428,Massive Dynamic,370.93
+INV-000429,Stark Industries,678.07
+INV-000430,Stark Industries,824.29
+INV-000431,Globex,745.17
+INV-000432,Wayne Enterprises,-322.57
+INV-000433,Globex,310.81
+INV-000434,Cyberdyne Systems,154.30
+INV-000435,Wayne Enterprises,914.81
+INV-000436,Globex,561.19
+INV-000437,Soylent Corp,856.17
+INV-000438,Wayne Enterprises,876.51
+INV-000439,Globex,334.89
+INV-000440,Soylent Corp,538.50
+INV-000441,Stark Industries,447.77
+INV-000442,Stark Industries,228.27
+INV-000443,Stark Industries,51.08
+INV-000444,Soylent Corp,783.47
+INV-000445,Stark Industries,629.96
+INV-000446,Initech,327.11
+INV-000447,Stark Industries,585.57
+INV-000448,,683.41
+INV-000449,Acme Corp,178.91
+INV-000450,Cyberdyne Systems,676.61
+INV-000451,Wayne Enterprises,473.48
+INV-000452,Soylent Corp,60.21
+INV-000453,Massive Dynamic,305.01
+INV-000454,Soylent Corp,-261.85
+INV-000455,Stark Industries,666.93
+INV-000456,Acme Corp,755.20
+INV-000457,Globex,94.36
+INV-000458,Massive Dynamic,189.28
+INV-000459,Stark Industries,892.09
+INV-000460,Globex,940.39
+INV-000461,Initech,723.81
+INV-000462,Stark Industries,43.48
+INV-000463,Massive Dynamic,532.74
+INV-000464,Initech,494.77
+INV-000465,Massive Dynamic,860.39
+INV-000466,Stark Industries,927.91
+INV-000467,Stark Industries,381.77
+INV-000468,,85.94
+INV-000469,Acme Corp,119.40
+INV-000470,Soylent Corp,42.35
+INV-000471,Acme Corp,658.87
+INV-000472,Initech,555.06
+INV-000473,Wayne Enterprises,837.02
+INV-000474,Massive Dynamic,225.85
+INV-000475,Massive Dynamic,50.34
+INV-000476,Soylent Corp,210.72
+INV-000477,Soylent Corp,696.17
+INV-000478,Massive Dynamic,137.57
+INV-000479,Acme Corp,491.13
+INV-000480,Acme Corp,72.41
+INV-000481,Stark Industries,345.68
+INV-000482,Cyberdyne Systems,672.56
+INV-000483,Cyberdyne Systems,598.78
+INV-000484,Wayne Enterprises,106.36
+INV-000485,Cyberdyne Systems,732.59
+INV-000486,Massive Dynamic,652.91
+INV-000487,Stark Industries,372.92
+INV-000488,Initech,411.54
+INV-000489,Wayne Enterprises,585.63
+INV-000490,Massive Dynamic,336.96
+INV-000491,Wayne Enterprises,13.03
+INV-000492,Stark Industries,996.65
+INV-000493,Cyberdyne Systems,639.11
+INV-000494,Acme Corp,37.47
+INV-000495,Stark Industries,311.64
+INV-000496,Cyberdyne Systems,988.81
+INV-000497,Acme Corp,337.85
+INV-000498,Massive Dynamic,516.62
+INV-000499,Acme Corp,47.20
+INV-000500,Globex,186.15
+INV-000501,Soylent Corp,1004.90
+INV-000502,Wayne Enterprises,330.26
+INV-000503,Cyberdyne Systems,647.36
+INV-000504,Stark Industries,145.74
+INV-000505,Massive Dynamic,733.86
+INV-000506,Globex,-28.90
+INV-000507,Massive Dynamic,835.86
+INV-000508,Acme Corp,787.72
+INV-000509,Initech,963.62
+INV-000510,Massive Dynamic,839.49
+INV-000511,Massive Dynamic,41.63
+INV-000512,Stark Industries,695.95
+INV-000513,Stark Industries,155.90
+INV-000514,Stark Industries,562.38
+INV-000515,Wayne Enterprises,236.55
+INV-000516,Stark Industries,96.96
+INV-000517,Globex,662.00
+INV-000518,Cyberdyne Systems,714.99
+INV-000519,Cyberdyne Systems,631.41
+INV-000520,,733.04
+INV-000521,Stark Industries,55.61
+INV-000522,Wayne Enterprises,596.11
+INV-000523,Globex,509.91
+INV-000524,Stark Industries,-459.78
+INV-000525,Stark Industries,299.28
+INV-000526,Soylent Corp,38.23
+INV-000527,Soylent Corp,96.49
+INV-000528,Soylent Corp,968.05
+INV-000529,Initech,707.04
+INV-000530,Acme Corp,286.17
+INV-000531,Stark Industries,422.93
+INV-000532,Cyberdyne Systems,489.07
+INV-000533,Wayne Enterprises,30.68
+INV-000534,Cyberdyne Systems,238.28
+INV-000535,Globex,409.96
+INV-000536,Massive Dynamic,965.31
+INV-000537,Wayne Enterprises,817.43
+INV-000538,Stark Industries,973.75
+INV-000539,Globex,920.35
+INV-000540,Wayne Enterprises,601.57
+INV-000541,Massive Dynamic,563.54
+INV-000542,Globex,60.82
+INV-000543,,483.19
+INV-000544,Globex,284.86
+INV-000545,Stark Industries,589.81
+INV-000546,Soylent Corp,520.49
+INV-000547,Initech,-412.36
+INV-000548,Massive Dynamic,339.32
+INV-000549,Initech,228.29
+INV-000550,Soylent Corp,71.35
+INV-000551,Stark Industries,456.16
+INV-000552,Soylent Corp,530.76
+INV-000553,Acme Corp,761.69
+INV-000554,,137.19
+INV-000555,Massive Dynamic,792.41
+INV-000556,Massive Dynamic,702.48
+INV-000557,Soylent Corp,257.91
+INV-000558,Wayne Enterprises,-51.37
+INV-000559,Globex,686.44
+INV-000560,Cyberdyne Systems,163.19
+INV-000561,Soylent Corp,515.72
+INV-000562,Cyberdyne Systems,694.55
+INV-000563,Stark Industries,439.29
+INV-000564,Stark Industries,850.70
+INV-000565,Acme Corp,857.63
+INV-000566,Soylent Corp,975.17
+INV-000567,Globex,642.10
+INV-000568,Initech,704.96
+INV-000569,Initech,650.44
+INV-000570,Acme Corp,975.03
+INV-000571,Wayne Enterprises,538.75
+INV-000572,Stark Industries,109.47
+INV-000573,Globex,165.52
+INV-000574,Wayne Enterprises,168.70
+INV-000575,Acme Corp,20.19
+INV-000576,,253.42
+INV-000577,Initech,261.72
+INV-000578,Cyberdyne Systems,703.52
+INV-000579,Soylent Corp,667.53
+INV-000580,Initech,506.62
+INV-000581,Acme Corp,999.06
+INV-000582,Globex,204.76
+INV-000583,Wayne Enterprises,634.06
+INV-000584,Massive Dynamic,934.48
+INV-000585,Massive Dynamic,651.38
+INV-000586,Globex,939.05
+INV-000587,Initech,85.00
+INV-000588,Cyberdyne Systems,271.94
+INV-000589,Stark Industries,513.89
+INV-000590,Massive Dynamic,515.19
+INV-000591,Acme Corp,623.45
+INV-000592,Wayne Enterprises,606.71
+INV-000593,Massive Dynamic,792.10
+INV-000594,Wayne Enterprises,-49.76
+INV-000595,Soylent Corp,140.01
+INV-000596,Initech,137.23
+INV-000597,Stark Industries,81.93
+INV-000598,Cyberdyne Systems,963.19
+INV-000599,Cyberdyne Systems,271.69
+INV-000600,Wayne Enterprises,496.88
+INV-000601,Cyberdyne Systems,54.08
+INV-000602,Acme Corp,75.11
+INV-000603,Soylent Corp,608.89
+INV-000604,Wayne Enterprises,233.85
+INV-000605,Acme Corp,356.71
+INV-000606,Wayne Enterprises,53.53
+INV-000607,Cyberdyne Systems,577.56
+INV-000608,Globex,623.59
+INV-000609,,513.27
+INV-000610,Cyberdyne Systems,304.66
+INV-000611,Wayne Enterprises,995.91
+INV-000612,Acme Corp,1004.48
+INV-000613,Globex,878.50
+INV-000614,Soylent Corp,659.28
+INV-000615,Wayne Enterprises,181.31
+INV-000616,Massive Dynamic,424.66
+INV-000617,Wayne Enterprises,412.74
+INV-000618,Soylent Corp,987.21
+INV-000619,Soylent Corp,163.22
+INV-000620,Massive Dynamic,553.94
+INV-000621,Massive Dynamic,613.21
+INV-000622,Massive Dynamic,321.65
+INV-000623,Cyberdyne Systems,498.46
+INV-000624,Wayne Enterprises,909.47
+INV-000625,Wayne Enterprises,785.55
+INV-000626,Massive Dynamic,784.08
+INV-000627,Stark Industries,606.85
+INV-000628,Cyberdyne Systems,737.25
+INV-000629,Initech,774.92
+INV-000630,Soylent Corp,573.65
+INV-000631,Globex,-61.77
+INV-000632,Massive Dynamic,939.22
+INV-000633,Wayne Enterprises,481.89
+INV-000634,Globex,396.93
+INV-000635,Acme Corp,556.54
+INV-000636,Acme Corp,163.96
+INV-000637,Acme Corp,596.33
+INV-000638,Wayne Enterprises,208.33
+INV-000639,Initech,568.77
+INV-000640,Initech,677.69
+INV-000641,Initech,126.39
+INV-000642,Massive Dynamic,436.21
+INV-000643,Stark Industries,350.91
+INV-000644,Stark Industries,654.24
+INV-000645,Stark Industries,435.89
+INV-000646,Acme Corp,304.41
+INV-000647,Soylent Corp,553.05
+INV-000648,Initech,423.55
+INV-000649,,399.26
+INV-000650,Soylent Corp,672.00
+INV-000651,Initech,637.90
+INV-000652,Wayne Enterprises,222.65
+INV-000653,Acme Corp,432.06
+INV-000654,Cyberdyne Systems,941.19
+INV-000655,Soylent Corp,465.27
+INV-000656,Globex,366.55
+INV-000657,Soylent Corp,321.26
+INV-000658,Globex,898.49
+INV-000659,Globex,616.96
+INV-000660,Cyberdyne Systems,951.62
+INV-000661,Wayne Enterprises,508.45
+INV-000662,Massive Dynamic,557.45
+INV-000663,Cyberdyne Systems,611.11
+INV-000664,Acme Corp,994.66
+INV-000665,,469.33
+INV-000666,Wayne Enterprises,608.33
+INV-000667,Cyberdyne Systems,591.70
+INV-000668,Acme Corp,774.03
+INV-000669,Globex,67.10
+INV-000670,Initech,452.06
+INV-000671,Initech,243.51
+INV-000672,Massive Dynamic,-225.52
+INV-000673,,211.94
+INV-000674,Soylent Corp,165.24
+INV-000675,Acme Corp,100.75
+INV-000676,Wayne Enterprises,111.85
+INV-000677,Wayne Enterprises,417.07
+INV-000678,Stark Industries,566.09
+INV-000679,Globex,714.98
+INV-000680,Wayne Enterprises,776.12
+INV-000681,Acme Corp,295.01
+INV-000682,Soylent Corp,441.42
+INV-000683,Soylent Corp,665.21
+INV-000684,Cyberdyne Systems,154.86
+INV-000685,Massive Dynamic,727.35
+INV-000686,Soylent Corp,-279.60
+INV-000687,Massive Dynamic,321.38
+INV-000688,,744.69
+INV-000689,Soylent Corp,93.05
+INV-000690,Cyberdyne Systems,619.28
+INV-000691,Wayne Enterprises,810.19
+INV-000692,Cyberdyne Systems,396.59
+INV-000693,,850.55
+INV-000694,Soylent Corp,868.10
+INV-000695,Wayne Enterprises,308.72
+INV-000696,Massive Dynamic,808.17
+INV-000697,Stark Industries,81.68
+INV-000698,Globex,734.50
+INV-000699,,557.39
+INV-000700,Massive Dynamic,63.15
+INV-000701,Initech,621.11
+INV-000702,Acme Corp,163.32
+INV-000703,Cyberdyne Systems,698.28
+INV-000704,Initech,474.12
+INV-000705,Acme Corp,590.21
+INV-000706,Initech,872.20
+INV-000707,Acme Corp,928.64
+INV-000708,Soylent Corp,725.35
+INV-000709,Soylent Corp,952.25
+INV-000710,Acme Corp,621.64
+INV-000711,Acme Corp,110.70
+INV-000712,Initech,180.37
+INV-000713,Acme Corp,453.09
+INV-000714,Massive Dynamic,173.45
+INV-000715,Acme Corp,359.34
+INV-000716,Acme Corp,245.11
+INV-000717,,398.03
+INV-000718,Globex,352.43
+INV-000719,Initech,473.40
+INV-000720,Soylent Corp,136.29
+INV-000721,Cyberdyne Systems,900.37
+INV-000722,Stark Industries,477.18
+INV-000723,Cyberdyne Systems,544.71
+INV-000724,Cyberdyne Systems,222.68
+INV-000725,Soylent Corp,25.35
+INV-000726,,807.00
+INV-000727,Cyberdyne Systems,626.50
+INV-000728,Globex,900.66
+INV-000729,Acme Corp,244.79
+INV-000730,Initech,453.19
+INV-000731,Initech,99.24
+INV-000732,Acme Corp,748.83
+INV-000733,Cyberdyne Systems,765.78
+INV-000734,Stark Industries,471.86
+INV-000735,Soylent Corp,941.60
+INV-000736,Initech,811.22
+INV-000737,Stark Industries,23.37
+INV-000738,Soylent Corp,921.55
+INV-000739,Acme Corp,674.15
+INV-000740,Massive Dynamic,463.52
+INV-000741,Wayne Enterprises,587.27
+INV-000742,Acme Corp,188.48
+INV-000743,Soylent Corp,-165.08
+INV-000744,Soylent Corp,880.13
+INV-000745,Acme Corp,117.22
+INV-000746,Stark Industries,574.52
+INV-000747,Acme Corp,686.66
+INV-000748,Initech,888.19
+INV-000749,Cyberdyne Systems,493.43
+INV-000750,Wayne Enterprises,264.29
+INV-000751,Soylent Corp,767.12
+INV-000752,Globex,385.00
+INV-000753,Stark Industries,643.30
+INV-000754,Massive Dynamic,931.50
+INV-000755,Cyberdyne Systems,235.66
+INV-000756,Initech,419.56
+INV-000757,Cyberdyne Systems,208.55
+INV-000758,Wayne Enterprises,150.28
+INV-000759,Cyberdyne Systems,628.27
+INV-000760,Wayne Enterprises,473.88
+INV-000761,Cyberdyne Systems,512.93
+INV-000762,Initech,319.61
+INV-000763,Stark Industries,103.05
+INV-000764,Acme Corp,138.74
+INV-000765,Soylent Corp,211.97
+INV-000766,Wayne Enterprises,23.37
+INV-000767,Globex,599.32
+INV-000768,Cyberdyne Systems,885.25
+INV-000769,Globex,210.74
+INV-000770,Soylent Corp,639.85
+INV-000771,Wayne Enterprises,631.42
+INV-000772,Acme Corp,395.93
+INV-000773,Wayne Enterprises,748.99
+INV-000774,Globex,916.50
+INV-000775,Initech,887.00
+INV-000776,Acme Corp,833.37
+INV-000777,Initech,503.96
+INV-000778,Massive Dynamic,314.73
+INV-000779,,211.51
+INV-000780,Acme Corp,18.33
+INV-000781,Wayne Enterprises,90.19
+INV-000782,Globex,485.23
+INV-000783,Soylent Corp,746.25
+INV-000784,Initech,338.42
+INV-000785,Initech,225.78
+INV-000786,Soylent Corp,121.03
+INV-000787,Wayne Enterprises,918.69
+INV-000788,Acme Corp,292.06
+INV-000789,Initech,604.93
+INV-000790,,566.40
+INV-000791,Cyberdyne Systems,606.17
+INV-000792,Soylent Corp,676.04
+INV-000793,Acme Corp,772.00
+INV-000794,Cyberdyne Systems,387.47
+INV-000795,Massive Dynamic,59.91
+INV-000796,,352.41
+INV-000797,Massive Dynamic,1007.68
+INV-000798,Initech,259.24
+INV-000799,Stark Industries,432.31
+INV-000800,Globex,539.56
+INV-000801,Globex,976.33
+INV-000802,,272.32
+INV-000803,Soylent Corp,875.42
+INV-000804,Initech,107.93
+INV-000805,Soylent Corp,286.49
+INV-000806,Wayne Enterprises,199.54
+INV-000807,Stark Industries,658.71
+INV-000808,Cyberdyne Systems,276.48
+INV-000809,Massive Dynamic,369.86
+INV-000810,,274.47
+INV-000811,Wayne Enterprises,254.04
+INV-000812,Cyberdyne Systems,388.57
+INV-000813,Cyberdyne Systems,960.27
+INV-000814,Acme Corp,172.29
+INV-000815,Soylent Corp,257.95
+INV-000816,Cyberdyne Systems,826.69
+INV-000817,Globex,206.27
+INV-000818,Wayne Enterprises,725.41
+INV-000819,Globex,400.25
+INV-000820,Acme Corp,142.81
+INV-000821,,441.74
+INV-000822,Globex,814.44
+INV-000823,Wayne Enterprises,697.97
+INV-000824,Soylent Corp,401.26
+INV-000825,Massive Dynamic,843.97
+INV-000826,Massive Dynamic,268.72
+INV-000827,Cyberdyne Systems,551.49
+INV-000828,Soylent Corp,741.66
+INV-000829,Massive Dynamic,955.32
+INV-000830,Acme Corp,823.05
+INV-000831,Cyberdyne Systems,355.55
+INV-000832,Cyberdyne Systems,190.63
+INV-000833,Soylent Corp,162.51
+INV-000834,Soylent Corp,706.02
+INV-000835,Initech,364.01
+INV-000836,Acme Corp,475.33
+INV-000837,Acme Corp,482.36
+INV-000838,Cyberdyne Systems,584.35
+INV-000839,Soylent Corp,204.32
+INV-000840,,976.71
+INV-000841,Acme Corp,313.43
+INV-000842,Globex,87.21
+INV-000843,Initech,312.27
+INV-000844,Acme Corp,942.46
+INV-000845,Stark Industries,390.61
+INV-000846,Cyberdyne Systems,278.07
+INV-000847,Soylent Corp,390.43
+INV-000848,Massive Dynamic,924.41
+INV-000849,Massive Dynamic,208.89
+INV-000850,Globex,736.76
+INV-000851,Soylent Corp,222.33
+INV-000852,Initech,483.14
+INV-000853,Globex,29.61
+INV-000854,Massive Dynamic,843.47
+INV-000855,Initech,314.74
+INV-000856,Initech,840.75
+INV-000857,Acme Corp,609.64
+INV-000858,Massive Dynamic,45.54
+INV-000859,Cyberdyne Systems,168.31
+INV-000860,Soylent Corp,328.26
+INV-000861,Acme Corp,273.22
+INV-000862,Massive Dynamic,556.65
+INV-000863,Initech,732.10
+INV-000864,,850.89
+INV-000865,Massive Dynamic,371.12
+INV-000866,Initech,534.46
+INV-000867,Acme Corp,50.31
+INV-000868,Soylent Corp,284.75
+INV-000869,Acme Corp,594.93
+INV-000870,Massive Dynamic,32.75
+INV-000871,Initech,799.33
+INV-000872,Wayne Enterprises,360.97
+INV-000873,Stark Industries,164.08
+INV-000874,Initech,-394.49
+INV-000875,Soylent Corp,17.51
+INV-000876,Globex,786.31
+INV-000877,Cyberdyne Systems,890.26
+INV-000878,Stark Industries,723.60
+INV-000879,Acme Corp,-285.64
+INV-000880,Massive Dynamic,705.99
+INV-000881,Globex,943.27
+INV-000882,Massive Dynamic,680.22
+INV-000883,Wayne Enterprises,520.32
+INV-000884,Soylent Corp,533.32
+INV-000885,Initech,862.70
+INV-000886,Massive Dynamic,556.59
+INV-000887,Cyberdyne Systems,634.82
+INV-000888,Initech,610.64
+INV-000889,Globex,-254.11
+INV-000890,Cyberdyne Systems,561.79
+INV-000891,Soylent Corp,602.86
+INV-000892,Soylent Corp,315.69
+INV-000893,Globex,949.82
+INV-000894,Wayne Enterprises,181.08
+INV-000895,Initech,896.57
+INV-000896,Initech,469.22
+INV-000897,Globex,988.45
+INV-000898,Wayne Enterprises,892.82
+INV-000899,Massive Dynamic,940.88
+INV-000900,Massive Dynamic,312.34
+INV-000901,Wayne Enterprises,35.86
+INV-000902,Soylent Corp,403.54
+INV-000903,Initech,808.37
+INV-000904,Wayne Enterprises,462.96
+INV-000905,Wayne Enterprises,309.41
+INV-000906,Wayne Enterprises,29.67
+INV-000907,Initech,726.56
+INV-000908,Acme Corp,105.93
+INV-000909,Cyberdyne Systems,557.65
+INV-000910,Acme Corp,53.73
+INV-000911,Globex,855.61
+INV-000912,,597.94
+INV-000913,Initech,77.71
+INV-000914,Globex,334.46
+INV-000915,Initech,221.88
+INV-000916,Soylent Corp,44.31
+INV-000917,Wayne Enterprises,204.23
+INV-000918,Initech,810.70
+INV-000919,Cyberdyne Systems,1005.82
+INV-000920,Globex,775.52
+INV-000921,Soylent Corp,-49.51
+INV-000922,Wayne Enterprises,206.32
+INV-000923,Initech,642.85
+INV-000924,Massive Dynamic,815.07
+INV-000925,Wayne Enterprises,521.74
+INV-000926,Massive Dynamic,493.85
+INV-000927,Stark Industries,923.56
+INV-000928,Wayne Enterprises,186.14
+INV-000929,Massive Dynamic,862.40
+INV-000930,Soylent Corp,447.52
+INV-000931,Wayne Enterprises,146.91
+INV-000932,Wayne Enterprises,453.46
+INV-000933,Soylent Corp,481.76
+INV-000934,Massive Dynamic,21.49
+INV-000935,Initech,448.84
+INV-000936,Soylent Corp,-279.89
+INV-000937,Stark Industries,586.14
+INV-000938,Massive Dynamic,54.50
+INV-000939,Cyberdyne Systems,513.61
+INV-000940,Soylent Corp,829.70
+INV-000941,Soylent Corp,961.01
+INV-000942,Acme Corp,831.76
+INV-000943,Acme Corp,665.25
+INV-000944,Wayne Enterprises,256.60
+INV-000945,,986.27
+INV-000946,Wayne Enterprises,84.79
+INV-000947,Stark Industries,1006.66
+INV-000948,Globex,674.89
+INV-000949,Cyberdyne Systems,755.10
+INV-000950,Initech,978.03
+INV-000951,Globex,23.99
+INV-000952,Acme Corp,-89.78
+INV-000953,Stark Industries,209.73
+INV-000954,Stark Industries,933.76
+INV-000955,Globex,607.23
+INV-000956,Wayne Enterprises,200.42
+INV-000957,Massive Dynamic,420.31
+INV-000958,Massive Dynamic,564.63
+INV-000959,Wayne Enterprises,291.57
+INV-000960,Initech,239.17
+INV-000961,Wayne Enterprises,808.79
+INV-000962,Initech,470.43
+INV-000963,Stark Industries,781.69
+INV-000964,Soylent Corp,155.82
+INV-000965,Initech,86.19
+INV-000966,Initech,749.99
+INV-000967,Wayne Enterprises,52.80
+INV-000968,Wayne Enterprises,952.51
+INV-000969,Soylent Corp,995.24
+INV-000970,Stark Industries,426.19
+INV-000971,Cyberdyne Systems,232.69
+INV-000972,Massive Dynamic,885.45
+INV-000973,Acme Corp,250.08
+INV-000974,Cyberdyne Systems,700.92
+INV-000975,Globex,639.71
+INV-000976,Initech,104.94
+INV-000977,Stark Industries,460.14
+INV-000978,Soylent Corp,544.23
+INV-000979,Globex,527.21
+INV-000980,Stark Industries,282.89
+INV-000981,Cyberdyne Systems,293.05
+INV-000982,Cyberdyne Systems,837.03
+INV-000983,Massive Dynamic,61.85
+INV-000984,Massive Dynamic,1003.46
+INV-000985,Stark Industries,508.51
+INV-000986,Soylent Corp,957.05
+INV-000987,Initech,836.91
+INV-000988,,51.09
+INV-000989,Massive Dynamic,44.96
+INV-000990,Acme Corp,179.80
+INV-000991,Cyberdyne Systems,98.11
+INV-000992,Cyberdyne Systems,19.01
+INV-000993,Acme Corp,83.40
+INV-000994,Wayne Enterprises,872.07
+INV-000995,Stark Industries,-256.21
+INV-000996,Acme Corp,20.94
+INV-000997,Cyberdyne Systems,557.72
+INV-000998,Stark Industries,642.54
+INV-000999,Initech,509.40
+INV-001000,Stark Industries,799.93
