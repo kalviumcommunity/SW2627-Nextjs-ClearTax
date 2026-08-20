@@ -58,6 +58,11 @@ export default function Home() {
                     </Link>
                   </motion.div>
                   <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                    <Link className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-semibold text-stone-700 bg-stone-900 text-white rounded-full hover:bg-stone-800 transition-all shadow-sm border border-stone-700" href="/interview-demo">
+                      <Cpu className="w-4 h-4 text-indigo-400" /> JS Interview Studio
+                    </Link>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                     <Link className="inline-flex items-center px-7 py-3.5 text-sm font-semibold text-stone-600 bg-white border border-stone-200/80 rounded-full hover:bg-stone-50 transition-all shadow-sm" href="#features">
                       Learn More
                     </Link>
