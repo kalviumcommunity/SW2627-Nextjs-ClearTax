@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { href: APP_ROUTES.HOME, label: "Home" },
+  { href: APP_ROUTES.INTERVIEW_DEMO, label: "JS Interview Studio" },
   { href: "#features", label: "Features" },
   { href: "#pricing", label: "How It Works" },
   { href: "#about", label: "About" },

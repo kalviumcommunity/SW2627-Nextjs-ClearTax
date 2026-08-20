@@ -8,4 +8,5 @@ export const APP_ROUTES = {
   PROFILE: "/profile",
   LOGIN: "/login",
   SIGNUP: "/signup",
+  INTERVIEW_DEMO: "/interview-demo",
 };
