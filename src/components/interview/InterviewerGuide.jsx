@@ -10,9 +10,19 @@ import {
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
-import { demonstrateEventLoopExecution } from "../../utils/interviewCoreConcepts";
+import { demonstrateEventLoopExecution, demonstrateMiddlewarePipeline } from "../../utils/interviewCoreConcepts";
 
 const FAQS = [
+  {
+    category: "Middleware Architecture",
+    question: "How does the Middleware 'Onion Model' work in JavaScript?",
+    answer: "In the Onion Model (Koa/Express composition pattern), each middleware receives (context, next). Execution moves INWARD through pre-processing logic of M1 -> M2 -> M3 until the target controller handler runs. Then execution yields and flows OUTWARD through post-processing logic of M3 -> M2 -> M1.\n\nCalling 'await next()' delegates control to downstream middleware; omitting 'next()' short-circuits the pipeline."
+  },
+  {
+    category: "Middleware Architecture",
+    question: "What is the difference between Next.js Edge Middleware and Node.js Express Middleware?",
+    answer: "• Next.js Edge Middleware (proxy.js / middleware.js): Runs at the V8 Edge network layer BEFORE a request hits Next.js rendering or serverless functions. Lightweight, zero Node.js native bindings, used for routing, geo-blocking, cookie auth, and redirects.\n• Node.js Express Middleware: Runs inside the Node.js runtime process on every incoming HTTP request. Has full access to Node APIs, database clients, and file system."
+  },
   {
     category: "Event Loop",
     question: "What is the priority order of JavaScript execution?",
@@ -38,12 +48,23 @@ const FAQS = [
 export default function InterviewerGuide() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [demoLog, setDemoLog] = useState([]);
+  const [activeTestName, setActiveTestName] = useState("");
 
   const runLiveUtilTest = () => {
     const logs = [];
     demonstrateEventLoopExecution((msg) => {
       logs.push(msg);
     });
+    setActiveTestName("Event Loop Priority Test");
+    setDemoLog(logs);
+  };
+
+  const runMiddlewareUtilTest = async () => {
+    const logs = [];
+    await demonstrateMiddlewarePipeline((msg) => {
+      logs.push(msg);
+    });
+    setActiveTestName("Middleware Pipeline Test");
     setDemoLog(logs);
   };
 
@@ -58,12 +79,20 @@ export default function InterviewerGuide() {
           <h3 className="text-xl font-bold font-outfit text-white">Technical Interview Q&A & Talk Tracks</h3>
         </div>
 
-        <button
-          onClick={runLiveUtilTest}
-          className="px-4 py-2 bg-[#5a38ef] hover:bg-[#4727d8] text-white text-xs font-semibold rounded-xl shadow-md transition-all flex items-center gap-2 shrink-0"
-        >
-          <Play className="w-4 h-4" /> Run src/utils/interviewCoreConcepts.js Test
-        </button>
+        <div className="flex flex-wrap gap-2 shrink-0">
+          <button
+            onClick={runMiddlewareUtilTest}
+            className="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-xl shadow-md transition-all flex items-center gap-1.5"
+          >
+            <Play className="w-3.5 h-3.5" /> Test Middleware Pipeline
+          </button>
+          <button
+            onClick={runLiveUtilTest}
+            className="px-3.5 py-2 bg-stone-800 hover:bg-stone-700 text-stone-200 text-xs font-semibold rounded-xl transition-all flex items-center gap-1.5"
+          >
+            <Play className="w-3.5 h-3.5" /> Test Event Loop
+          </button>
+        </div>
       </div>
 
       {/* Live Helper Utilities Execution Output */}

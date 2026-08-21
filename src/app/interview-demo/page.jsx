@@ -7,6 +7,7 @@ import EventLoopVisualizer from "../../components/interview/EventLoopVisualizer"
 import PromisesLab from "../../components/interview/PromisesLab";
 import CallbacksSimulator from "../../components/interview/CallbacksSimulator";
 import HoistingVisualizer from "../../components/interview/HoistingVisualizer";
+import MiddlewareVisualizer from "../../components/interview/MiddlewareVisualizer";
 import InterviewerGuide from "../../components/interview/InterviewerGuide";
 import {
   Cpu,
@@ -14,6 +15,7 @@ import {
   RefreshCw,
   Sparkles,
   BookOpen,
+  ShieldCheck,
   ArrowRight,
 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -26,6 +28,7 @@ export default function InterviewDemoPage() {
     { id: "promises", label: "Promises & Async Lab", icon: Sparkles, badge: "States & Concurrency" },
     { id: "callbacks", label: "Callbacks Simulator", icon: RefreshCw, badge: "Sync vs Async" },
     { id: "hoisting", label: "Hoisting & TDZ", icon: Zap, badge: "Scope & Creation" },
+    { id: "middleware", label: "Middleware Pipeline & Guards", icon: ShieldCheck, badge: "Onion & Auth Guards" },
     { id: "cheatsheet", label: "Interview Cheatsheet", icon: BookOpen, badge: "Q&A Talk Tracks" },
   ];
 
@@ -48,7 +51,7 @@ export default function InterviewDemoPage() {
             </h1>
 
             <p className="text-stone-300 text-sm sm:text-base leading-relaxed">
-              Interactive visual execution engines designed to demonstrate <strong>Event Loop priority</strong>, <strong>Promise immutability & concurrency</strong>, <strong>Synchronous vs Async Callbacks</strong>, and <strong>Temporal Dead Zone (TDZ) Hoisting</strong> live during tech interviews.
+              Interactive visual execution engines designed to demonstrate <strong>Event Loop priority</strong>, <strong>Promise immutability & concurrency</strong>, <strong>Middleware Onion Pipeline</strong>, <strong>Callbacks</strong>, and <strong>Hoisting TDZ</strong> live during tech interviews.
             </p>
           </div>
         </div>
@@ -90,6 +93,7 @@ export default function InterviewDemoPage() {
           {activeTab === "promises" && <PromisesLab />}
           {activeTab === "callbacks" && <CallbacksSimulator />}
           {activeTab === "hoisting" && <HoistingVisualizer />}
+          {activeTab === "middleware" && <MiddlewareVisualizer />}
           {activeTab === "cheatsheet" && <InterviewerGuide />}
         </motion.div>
 
