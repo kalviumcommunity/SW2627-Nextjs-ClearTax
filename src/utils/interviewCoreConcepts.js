@@ -239,3 +239,102 @@ export function safeEvaluateTDZ(accessorFn) {
     };
   }
 }
+
+// ----------------------------------------------------------------------------
+// 5. MIDDLEWARE PIPELINE & REQUEST GUARDS
+// ----------------------------------------------------------------------------
+
+/**
+ * Creates an interview-grade Middleware Pipeline Runner (Koa / Express Onion Model).
+ * Demonstrates async function chaining, context passing, and pre/post next() execution.
+ *
+ * @param {Array<Function>} middlewares - Array of (ctx, next) middleware functions
+ * @returns {Function} Callable runner accepting (initialContext)
+ */
+export function createMiddlewareRunner(middlewares = []) {
+  return async function runPipeline(ctx = {}) {
+    ctx.logs = ctx.logs || [];
+    ctx.state = ctx.state || {};
+    let index = -1;
+
+    async function dispatch(i) {
+      if (i <= index) {
+        throw new Error("next() called multiple times in single middleware step");
+      }
+      index = i;
+      const fn = middlewares[i];
+      if (!fn) return;
+
+      await fn(ctx, () => dispatch(i + 1));
+    }
+
+    await dispatch(0);
+    return ctx;
+  };
+}
+
+/**
+ * Demonstrates step-by-step Onion Model execution order of Middleware Pipeline:
+ * Inbound: M1 -> M2 -> M3 -> Controller Handler
+ * Outbound: Controller -> M3 (Post) -> M2 (Post) -> M1 (Post)
+ *
+ * @param {Function} logger - Logging callback function
+ */
+export async function demonstrateMiddlewarePipeline(logger = console.log) {
+  logger("🚀 Initiating Request through Middleware Pipeline...");
+
+  const loggingMiddleware = async (ctx, next) => {
+    const start = Date.now();
+    logger("   [M1 Inbound] Logger: Received Request -> " + ctx.url);
+    ctx.logs.push("M1 Inbound");
+    
+    await next(); // Pass to next middleware in stack
+    
+    const duration = Date.now() - start;
+    logger(`   [M1 Outbound] Logger: Response Status ${ctx.status || 200} (Processed in ${duration}ms)`);
+    ctx.logs.push("M1 Outbound");
+  };
+
+  const authGuardMiddleware = async (ctx, next) => {
+    logger("   [M2 Inbound] Auth Guard: Validating Authorization Header...");
+    if (!ctx.headers || !ctx.headers.authorization) {
+      ctx.status = 401;
+      ctx.body = { error: "Unauthorized: Missing Token" };
+      logger("   [M2 Intercept] Auth Guard: Unauthorized! Short-circuiting pipeline (next() NOT called).");
+      ctx.logs.push("M2 Blocked");
+      return; // Short circuit, do not call next()
+    }
+
+    ctx.user = { id: 101, name: "Interview Candidate", role: "ADMIN" };
+    logger(`   [M2 Inbound] Auth Guard: Authenticated as User ${ctx.user.id} (${ctx.user.role})`);
+    ctx.logs.push("M2 Passed");
+
+    await next();
+
+    logger("   [M2 Outbound] Auth Guard: Injecting Security Headers (X-Content-Type-Options)");
+    ctx.responseHeaders = { ...ctx.responseHeaders, "X-Content-Type-Options": "nosniff" };
+    ctx.logs.push("M2 Outbound");
+  };
+
+  const controllerHandler = async (ctx) => {
+    logger("   [Controller Target] Executing Route Business Logic for " + ctx.url);
+    ctx.status = 200;
+    ctx.body = { success: true, data: "Invoice data payload for " + ctx.user.name };
+    ctx.logs.push("Controller Handled");
+  };
+
+  const runner = createMiddlewareRunner([loggingMiddleware, authGuardMiddleware, controllerHandler]);
+
+  // Run Test 1: Valid Auth
+  logger("\n--- TEST 1: Request WITH Valid Authorization Header ---");
+  const ctx1 = { url: "/api/invoices", headers: { authorization: "Bearer valid_jwt_token_2026" } };
+  await runner(ctx1);
+  logger(`Final Response Body: ${JSON.stringify(ctx1.body)}`);
+
+  // Run Test 2: Missing Auth (Short-circuit)
+  logger("\n--- TEST 2: Request WITHOUT Authorization Header (Short Circuit) ---");
+  const ctx2 = { url: "/api/invoices", headers: {} };
+  await runner(ctx2);
+  logger(`Final Response Status: ${ctx2.status}, Body: ${JSON.stringify(ctx2.body)}`);
+}
+
